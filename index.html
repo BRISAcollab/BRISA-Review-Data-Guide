@@ -1,92 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="BRISA guidance for organizing systematic review files and preparing public research data releases.">
-  <title>BRISA Review Data Guide</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="BRISA guide for organizing systematic review project files and preparing a public data release.">
+<title>BRISA Review Data Guide</title>
+<style>
+:root{
+  --navy:#0b1b68; --blue:#24419a; --ink:#202536; --muted:#687083;
+  --line:#e1e5ed; --soft:#f6f7fa; --blue-soft:#f2f5ff; --paper:#fff;
+  --green:#276749; --green-soft:#f0f8f4; --amber:#8a5a00; --amber-soft:#fff8e8;
+  --radius:14px; --shadow:0 1px 2px rgba(20,31,70,.04),0 8px 28px rgba(20,31,70,.05);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;color:var(--ink);background:var(--soft);line-height:1.58}
+a{color:var(--blue);text-underline-offset:3px} code,pre{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+.site-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.header-inner{height:68px;max-width:1240px;margin:auto;padding:0 28px;display:flex;align-items:center;gap:18px}
+.logo{width:108px;height:48px;object-fit:contain;flex:none}
+.header-title{border-left:1px solid var(--line);padding-left:18px;line-height:1.2}.header-title strong{display:block;color:var(--navy);font-size:15px}.header-title span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.header-spacer{flex:1}.header-link{text-decoration:none;font-size:14px;font-weight:700;color:var(--navy);border:1px solid var(--line);padding:8px 11px;border-radius:8px}.header-link:hover{background:var(--blue-soft)}
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,860px);gap:46px;padding:42px 28px 90px;justify-content:center}
+.sidebar{position:sticky;top:94px;align-self:start;max-height:calc(100vh - 115px);overflow:auto;padding-right:12px}.side-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:#8a91a0;margin:0 0 8px 10px}.side-group{margin-bottom:18px}.sidebar a{display:block;text-decoration:none;color:#5f6676;font-size:13px;padding:6px 10px;border-radius:7px}.sidebar a:hover{background:#fff;color:var(--navy)}
+main{min-width:0}.hero{background:#fff;border:1px solid var(--line);border-radius:18px;padding:42px 46px 38px;box-shadow:var(--shadow);margin-bottom:30px}.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--blue);margin:0 0 10px}.hero h1{font-size:42px;line-height:1.06;letter-spacing:-.035em;color:var(--navy);margin:0 0 16px}.hero .lead{font-size:19px;line-height:1.5;color:#4f586d;max-width:730px;margin:0}.hero-note{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:#596174}.hero-note strong{color:var(--ink)}
+.section{scroll-margin-top:90px;margin:0 0 34px}.section-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 34px;box-shadow:var(--shadow)}
+h2{font-size:27px;line-height:1.2;color:var(--navy);letter-spacing:-.02em;margin:0 0 12px}h3{font-size:17px;color:var(--navy);margin:25px 0 9px}p{margin:0 0 14px}.muted{color:var(--muted)}
+.two-structure{display:grid;grid-template-columns:1fr 46px 1fr;gap:12px;align-items:stretch;margin-top:22px}.structure-box{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff}.structure-box h3{margin:0 0 7px;font-size:18px}.structure-box p{font-size:14px;color:#596174;margin:0}.structure-box.internal{border-top:4px solid var(--blue)}.structure-box.public{border-top:4px solid var(--green)}.arrow{display:grid;place-items:center;font-size:25px;color:#9aa1b0}
+.plain-steps{counter-reset:step;list-style:none;padding:0;margin:22px 0 0}.plain-steps li{counter-increment:step;position:relative;padding:0 0 18px 42px}.plain-steps li:before{content:counter(step);position:absolute;left:0;top:-1px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:white;font-size:13px;font-weight:800}.plain-steps li:last-child{padding-bottom:0}
+.note{border-left:3px solid var(--blue);background:var(--blue-soft);padding:13px 15px;border-radius:0 9px 9px 0;font-size:14px;margin-top:18px}.note.public{border-left-color:var(--green);background:var(--green-soft)}.note.caution{border-left-color:#c78a1e;background:var(--amber-soft)}
+.stage-title{display:flex;align-items:flex-start;gap:13px;margin-bottom:18px}.num{width:36px;height:36px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}.stage-title h2{margin:1px 0 2px}.stage-title p{margin:0;color:var(--muted);font-size:14px}
+.tree{background:#11182a;color:#f3f6ff;border-radius:11px;padding:17px 19px;overflow:auto;line-height:1.52;font-size:13px;margin:16px 0 21px}
+.folder-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:11px;overflow:hidden;font-size:13.5px;margin:12px 0 20px}.folder-table th{background:#f7f8fb;color:#4e5668;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.folder-table th,.folder-table td{text-align:left;vertical-align:top;padding:11px 12px;border-bottom:1px solid var(--line)}.folder-table tr:last-child td{border-bottom:0}.folder-table th:first-child,.folder-table td:first-child{width:25%}.folder-table th:last-child,.folder-table td:last-child{width:24%}.folder-table code{font-size:12px;color:var(--navy);font-weight:700}.yes{color:var(--green);font-weight:700}.no{color:#7a5260}.depends{color:var(--amber);font-weight:700}
+.details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fff;overflow:hidden}.details summary{cursor:pointer;font-size:14px;font-weight:700;color:var(--navy);padding:12px 14px;list-style:none}.details summary::-webkit-details-marker{display:none}.details summary:after{content:"+";float:right;color:#8a91a0;font-size:18px;line-height:1}.details[open] summary:after{content:"−"}.details[open] summary{background:#fafbfe;border-bottom:1px solid var(--line)}.details pre{margin:0;background:#101727;color:#edf1ff;padding:16px 18px;overflow:auto;font-size:12.5px;line-height:1.55}.details .example-text{padding:14px 16px;font-size:13.5px}.example-label{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#8a91a0;font-weight:800;margin:22px 0 7px}
+.release-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.release-item{border:1px solid var(--line);border-radius:10px;padding:13px 14px}.release-item strong{display:block;color:var(--navy);font-size:14px}.release-item span{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.repo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.repo-card{border:1px solid var(--line);border-radius:11px;padding:15px}.repo-card h3{margin:0 0 6px;font-size:16px}.repo-card p{font-size:13px;color:#596174;margin:0}.repo-card .small{display:block;margin-top:8px;font-size:12px;color:#858c9b}.checklist{margin:13px 0 0;padding-left:20px}.checklist li{margin-bottom:6px}.refs{display:grid;grid-template-columns:1fr 1fr;gap:11px}.ref{border:1px solid var(--line);border-radius:10px;padding:14px}.ref strong{display:block;color:var(--navy);font-size:14px}.ref span{display:block;color:var(--muted);font-size:12.5px;margin:4px 0 8px}.ref a{font-size:12.5px;font-weight:700}
+footer{text-align:center;padding:32px 0 0;color:#858c9b;font-size:12px}footer img{width:112px;height:50px;object-fit:contain;display:block;margin:0 auto 8px}
+@media(max-width:980px){.shell{grid-template-columns:1fr;gap:0;padding:26px 20px 70px}.sidebar{display:none}.hero{padding:34px 30px}.hero h1{font-size:36px}}
+@media(max-width:650px){.header-inner{padding:0 16px;height:62px}.logo{width:92px;height:42px}.header-title{display:none}.header-link{font-size:12px;padding:7px 9px}.shell{padding:18px 12px 50px}.hero,.section-card{padding:25px 20px;border-radius:13px}.hero h1{font-size:31px}.hero .lead{font-size:17px}.two-structure{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.release-list,.repo-grid,.refs{grid-template-columns:1fr}.folder-table{font-size:12px;display:block;overflow-x:auto}.folder-table th,.folder-table td{min-width:145px}.stage-title{gap:10px}}
+</style>
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="#top" aria-label="BRISA Review Data Guide home">
-    <img src="https://static.wixstatic.com/media/f7c9a2_13fff47ff6494c4d843a3193df0d2d49~mv2.png/v1/fill/w_660%2Ch_290%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/logo5.png" alt="BRISA logo">
-    <span>Review Data Guide</span>
-  </a>
-  <nav class="toplinks">
-    <a href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">BRISA website</a>
-    <a href="#references">References</a>
-  </nav>
+<header class="site-header">
+  <div class="header-inner">
+    <img class="logo" src="brisa-logo.png" alt="BRISA logo">
+    <div class="header-title"><strong>Review Data Guide</strong><span>Project organization and public data release</span></div>
+    <div class="header-spacer"></div>
+    <a class="header-link" href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">BRISA website ↗</a>
+  </div>
 </header>
 
-<div class="layout" id="top">
-  <aside class="sidebar" aria-label="Guide navigation">
-    <p class="nav-title">Guide</p>
-    <a href="#about">About</a>
-    <a href="#how-it-works">How the two structures relate</a>
-    <a href="#workspace">Internal workspace</a>
-    <a href="#readme">00 README</a>
-    <a href="#admin">01 Administration</a>
-    <a href="#protocol">02 Protocol</a>
-    <a href="#search">03 Search</a>
-    <a href="#screening">04 Screening</a>
-    <a href="#extraction">05 Extraction</a>
-    <a href="#assessment">06 Assessment</a>
-    <a href="#analysis">07 Analysis</a>
-    <a href="#outputs">08 Outputs</a>
-    <a href="#manuscript">09 Manuscript</a>
-    <a href="#release">10 Public release</a>
-    <a href="#repository">Choosing a repository</a>
-    <a href="#references">References</a>
-  </aside>
+<div class="shell">
+<aside class="sidebar" aria-label="Page navigation">
+  <div class="side-group"><p class="side-label">Start here</p><a href="#about">About this guide</a><a href="#relationship">Internal vs public</a><a href="#workspace">Project structure</a></div>
+  <div class="side-group"><p class="side-label">Internal workspace</p><a href="#readme">00 README</a><a href="#admin">01 Administration</a><a href="#protocol">02 Protocol</a><a href="#search">03 Search</a><a href="#screening">04 Screening</a><a href="#extraction">05 Extraction</a><a href="#assessment">06 Assessment</a><a href="#analysis">07 Analysis</a><a href="#outputs">08 Outputs</a><a href="#manuscript">09 Manuscript</a></div>
+  <div class="side-group"><p class="side-label">Sharing</p><a href="#release">10 Public release</a><a href="#repository">Choosing a repository</a><a href="#references">Sources</a></div>
+</aside>
 
-  <main>
-    <section class="hero" id="about">
-      <p class="eyebrow">BRISA</p>
-      <h1>Review Data Guide</h1>
-      <p class="lead">This guide describes how to organize files while a systematic review is being conducted and how to prepare the final materials for a public repository.</p>
-      <p>The structure is designed for preclinical systematic reviews using different software and workflows. A project may use Rayyan, Covidence, DistillerSR, spreadsheets, R, RevMan, jamovi, Stata, Python, or other tools. The folder structure records what happened in the review without requiring a specific platform.</p>
-      <div class="intro-box">
-        <h2>What this guide is for</h2>
-        <p>During a review, the team creates more material than should appear in the final public repository. Drafts, training files, reviewer-level decisions, platform exports, working spreadsheets, and full-text PDFs may be important internally, but only part of that material is needed for public reuse.</p>
-        <p>This guide therefore uses two related structures:</p>
-        <ol>
-          <li><strong>Internal workspace:</strong> the complete working record of the review.</li>
-          <li><strong>Public release:</strong> a smaller, documented set of files selected from the internal workspace.</li>
-        </ol>
-      </div>
-    </section>
+<main>
+<section class="hero section" id="about">
+  <p class="kicker">BRISA</p>
+  <h1>Review Data Guide</h1>
+  <p class="lead">A folder structure for managing a systematic review project and preparing the files that will be shared in a public repository.</p>
+  <div class="hero-note"><strong>Scope.</strong> The guide is designed for preclinical systematic reviews. It does not require a specific screening, extraction, or analysis platform. Projects may use Rayyan, Covidence, DistillerSR, spreadsheets, RevMan, jamovi, R, Stata, Python, or other tools.</div>
+</section>
 
-    <section id="how-it-works">
-      <h2>How the two structures relate</h2>
-      <div class="flow">
-        <div class="flow-card">
-          <span>1</span>
-          <h3>Work inside the project workspace</h3>
-          <p>Keep source files, original exports, working files, reviewer decisions, notes, scripts, and final datasets in the relevant stage folders.</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-card">
-          <span>2</span>
-          <h3>Select the final materials</h3>
-          <p>At publication, identify the files another researcher needs to understand the methods, inspect the data, and reproduce the analysis.</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-card">
-          <span>3</span>
-          <h3>Prepare the public release</h3>
-          <p>Copy and document those files in <code>10_PUBLIC_RELEASE</code>, then deposit that folder in an appropriate repository.</p>
-        </div>
-      </div>
-      <div class="callout">
-        <strong>Important:</strong> the public repository is not a copy of the internal workspace. It is a curated release created from it.
-      </div>
-    </section>
+<section class="section" id="relationship">
+<div class="section-card">
+  <h2>Internal workspace and public repository</h2>
+  <p>The two structures have different purposes. The internal workspace keeps the working record of the review. The public release contains the files needed to understand and reuse the completed work.</p>
+  <div class="two-structure">
+    <div class="structure-box internal"><h3>Internal workspace</h3><p>Used throughout the project. It may contain drafts, training files, platform exports, reviewer-level decisions, working spreadsheets, article PDFs, scripts, notes, and final datasets.</p></div>
+    <div class="arrow">→</div>
+    <div class="structure-box public"><h3>Public release</h3><p>Prepared near publication. It contains selected final files, guides, data, code, and documentation. It is deposited in a suitable repository.</p></div>
+  </div>
+  <div class="note public"><strong>The public release is not a copy of the internal workspace.</strong> It is prepared from the internal folders after checking which files are final, interpretable, shareable, and useful to other researchers.</div>
+  <h3>How to use this guide</h3>
+  <ol class="plain-steps"><li>Create the internal folders that apply to your review.</li><li>Store original exports and working files in the relevant stage rather than overwriting them.</li><li>At publication, select the files marked for public sharing and copy them into <code>10_PUBLIC_RELEASE</code>.</li><li>Deposit the public release in a repository that meets the needs of the project, journal, funder, and institution.</li></ol>
+</div>
+</section>
 
-    <section id="workspace">
-      <h2>Internal workspace</h2>
-      <p>The internal structure follows the stages of a review. Create only folders that are relevant to the project.</p>
-      <pre class="tree"><code>PROJECT/
+<section class="section" id="workspace">
+<div class="section-card">
+  <h2>Internal project structure</h2>
+  <p>Create only the folders that apply to the review. The numbering keeps the project ordered by stage.</p>
+  <pre class="tree"><code>PROJECT/
 ├── 00_README/
 ├── 01_ADMIN/
 ├── 02_PROTOCOL/
@@ -98,38 +95,17 @@
 ├── 08_OUTPUTS/
 ├── 09_MANUSCRIPT/
 └── 10_PUBLIC_RELEASE/</code></pre>
-      <div class="rule-grid">
-        <div><strong>Keep source files unchanged</strong><p>Original database or platform exports should be preserved before editing, cleaning, or converting them.</p></div>
-        <div><strong>Use dated snapshots when needed</strong><p>Use ISO dates such as <code>2026-08-23</code> for dated versions and avoid names such as <code>final_final2.xlsx</code>.</p></div>
-        <div><strong>Do not create empty folders</strong><p>If a review does not include a given assessment or analysis step, that part of the structure can be omitted.</p></div>
-      </div>
-    </section>
+  <div class="note"><strong>File naming.</strong> Prefer descriptive names and ISO dates (<code>YYYY-MM-DD</code>). Preserve original exports before editing them. Avoid names such as <code>final_final2.xlsx</code>.</div>
+</div>
+</section>
 
-    <section class="stage" id="readme">
-      <div class="stage-head"><span>00</span><div><h2>README</h2><p>Project orientation and current status.</p></div></div>
-      <pre><code>00_README/
+<section class="section" id="readme"><div class="section-card">
+<div class="stage-title"><div class="num">00</div><div><h2>README</h2><p>Orientation for anyone entering the project.</p></div></div>
+<pre class="tree"><code>00_README/
 └── README.md</code></pre>
-      <p>The internal README should allow a new collaborator to understand what the project is, where the main files are, and which platforms are being used.</p>
-      <div class="columns">
-        <div>
-          <h3>Store here</h3>
-          <ul>
-            <li>Project title and review question</li>
-            <li>Project leads and team roles</li>
-            <li>Current project stage</li>
-            <li>Protocol and registration links</li>
-            <li>Main software/platforms</li>
-            <li>Short explanation of the folder structure</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Public release</h3>
-          <p>Create a separate public-facing <code>README.md</code> describing the released files, the related publication, licenses, and how to reproduce the analysis when applicable.</p>
-        </div>
-      </div>
-      <details class="example" open>
-        <summary>Example: internal README.md</summary>
-        <pre><code># Project title
+<table class="folder-table"><thead><tr><th>File</th><th>Store here</th><th>Public release</th></tr></thead><tbody><tr><td><code>README.md</code></td><td>Project title, question, leads, current stage, registration link, software/platforms, and short description of the folders.</td><td><span class="yes">Create a separate public README</span></td></tr></tbody></table>
+<p class="example-label">Built-in example</p>
+<details class="details" open><summary>Example internal README.md</summary><pre><code># Project title
 
 ## Review question
 Effects of [intervention] in preclinical models of [condition].
@@ -145,60 +121,47 @@ PROSPERO: CRDXXXXXXXX
 - Data extraction: Google Sheets
 - Analysis: R
 
-## Main project folders
+## Folder notes
 03_SEARCH contains search strategies and database exports.
-04_SCREENING contains screening guides, exports, and final decisions.
-05_EXTRACTION contains extraction guidance and extracted data.</code></pre>
-      </details>
-    </section>
+04_SCREENING contains screening rules, exports, and final decisions.
+05_EXTRACTION contains the extraction guide, forms, and extracted data.</code></pre></details>
+</div></section>
 
-    <section class="stage" id="admin">
-      <div class="stage-head"><span>01</span><div><h2>Administration</h2><p>Files used to manage the project.</p></div></div>
-      <pre><code>01_ADMIN/
+<section class="section" id="admin"><div class="section-card">
+<div class="stage-title"><div class="num">01</div><div><h2>Administration</h2><p>Files used to manage the project.</p></div></div>
+<pre class="tree"><code>01_ADMIN/
 ├── Team/
 ├── Meetings/
 ├── Authorship/
 ├── Timeline/
 └── Key_references/</code></pre>
-      <table class="file-table">
-        <thead><tr><th>Folder</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>Team</code></td><td>Contacts, roles, contributor list</td><td>Usually no</td></tr>
-          <tr><td><code>Meetings</code></td><td>Minutes, recordings, agendas</td><td>No</td></tr>
-          <tr><td><code>Authorship</code></td><td>Authorship agreements and contribution rules</td><td>No</td></tr>
-          <tr><td><code>Timeline</code></td><td>Project schedule and milestones</td><td>No</td></tr>
-          <tr><td><code>Key_references</code></td><td>Methodological papers used by the team</td><td>Usually no</td></tr>
-        </tbody>
-      </table>
-    </section>
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>Team</code></td><td>Contacts, roles, contributor list.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>Meetings</code></td><td>Minutes, agendas, recordings.</td><td><span class="no">No</span></td></tr><tr><td><code>Authorship</code></td><td>Authorship agreements and contribution rules.</td><td><span class="no">No</span></td></tr><tr><td><code>Timeline</code></td><td>Project schedule and milestones.</td><td><span class="no">No</span></td></tr><tr><td><code>Key_references</code></td><td>Methodological references used by the team.</td><td><span class="no">Usually no</span></td></tr>
+</tbody></table>
+<details class="details"><summary>Example team_roles.csv</summary><pre><code>name,role,project_tasks
+Reviewer A,Project lead,"protocol, screening, analysis"
+Reviewer B,Reviewer,"screening, extraction"
+Reviewer C,Reviewer,"screening, risk of bias"</code></pre></details>
+</div></section>
 
-    <section class="stage" id="protocol">
-      <div class="stage-head"><span>02</span><div><h2>Protocol</h2><p>What was planned and what changed.</p></div></div>
-      <pre><code>02_PROTOCOL/
+<section class="section" id="protocol"><div class="section-card">
+<div class="stage-title"><div class="num">02</div><div><h2>Protocol</h2><p>What was planned and what changed.</p></div></div>
+<pre class="tree"><code>02_PROTOCOL/
 ├── Drafts/
 ├── Final/
 ├── Registration/
 └── Amendments/</code></pre>
-      <table class="file-table">
-        <thead><tr><th>Folder</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>Drafts</code></td><td>Working versions of the protocol</td><td>Usually no</td></tr>
-          <tr><td><code>Final</code></td><td>Approved protocol used by the team</td><td>Yes</td></tr>
-          <tr><td><code>Registration</code></td><td>PROSPERO, OSF registration, or another registration record</td><td>Yes, or link to the record</td></tr>
-          <tr><td><code>Amendments</code></td><td>Dated deviations or changes made after the protocol was finalized</td><td>Yes when relevant to interpretation</td></tr>
-        </tbody>
-      </table>
-      <details class="example">
-        <summary>Example: amendments.csv</summary>
-        <pre><code>date,section,change,reason
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>Drafts</code></td><td>Working protocol versions.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>Final</code></td><td>Approved protocol used by the team.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>Registration</code></td><td>PROSPERO, OSF Registration, or another registration record.</td><td><span class="yes">Link or copy</span></td></tr><tr><td><code>Amendments</code></td><td>Dated changes made after the protocol was finalized.</td><td><span class="depends">When relevant</span></td></tr>
+</tbody></table>
+<details class="details"><summary>Example amendments.csv</summary><pre><code>date,section,change,reason
 2026-05-11,Eligibility criteria,Added adult zebrafish models,Relevant studies were identified during search development
-2026-06-02,Outcome definition,Clarified preferred time point,Needed for consistent extraction across reviewers</code></pre>
-      </details>
-    </section>
+2026-06-02,Outcome definition,Clarified preferred time point,Needed for consistent extraction across reviewers</code></pre></details>
+</div></section>
 
-    <section class="stage" id="search">
-      <div class="stage-head"><span>03</span><div><h2>Search</h2><p>Preserve how each search was developed, executed, exported, and deduplicated.</p></div></div>
-      <pre><code>03_SEARCH/
+<section class="section" id="search"><div class="section-card">
+<div class="stage-title"><div class="num">03</div><div><h2>Search</h2><p>Development, execution, original exports, and deduplication.</p></div></div>
+<pre class="tree"><code>03_SEARCH/
 ├── 01_Search_development/
 │   ├── Sentinel_papers/
 │   └── Draft_strategies/
@@ -206,39 +169,21 @@ PROSPERO: CRDXXXXXXXX
 ├── 03_Database_exports/
 ├── 04_Deduplication/
 └── search_log.csv</code></pre>
-
-      <table class="file-table">
-        <thead><tr><th>Folder/file</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>01_Search_development</code></td><td>Test searches, sentinel papers, draft terms and strategies</td><td>Usually no</td></tr>
-          <tr><td><code>02_Final_strategies</code></td><td>One strategy per database/platform, exactly as executed</td><td>Yes</td></tr>
-          <tr><td><code>03_Database_exports</code></td><td>Original RIS, NBIB, CSV, TXT or other database exports</td><td>When redistribution is permitted</td></tr>
-          <tr><td><code>04_Deduplication</code></td><td>Deduplication scripts, reports, or intermediate files</td><td>Method and code when useful</td></tr>
-          <tr><td><code>search_log.csv</code></td><td>Database, platform, date, retrieval count, strategy file and export file</td><td>Yes</td></tr>
-        </tbody>
-      </table>
-
-      <details class="example" open>
-        <summary>Example: search_log.csv</summary>
-        <pre><code>database,platform,search_date,records_retrieved,strategy_file,export_file
+<table class="folder-table"><thead><tr><th>Folder / file</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>01_Search_development</code></td><td>Sentinel papers, test searches, draft terms and strategies.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>02_Final_strategies</code></td><td>One final strategy per database/platform, exactly as executed.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>03_Database_exports</code></td><td>Original RIS, NBIB, CSV, TXT, or other exports. Do not overwrite these files.</td><td><span class="depends">If redistribution is permitted</span></td></tr><tr><td><code>04_Deduplication</code></td><td>Deduplication scripts, reports, and intermediate files.</td><td><span class="depends">Method/code when useful</span></td></tr><tr><td><code>search_log.csv</code></td><td>Database, platform, date, number retrieved, strategy file, export file.</td><td><span class="yes">Yes</span></td></tr>
+</tbody></table>
+<p class="example-label">Built-in examples</p>
+<details class="details" open><summary>Example search_log.csv</summary><pre><code>database,platform,search_date,records_retrieved,strategy_file,export_file
 MEDLINE,PubMed,2026-02-10,842,pubmed_strategy.txt,pubmed_2026-02-10.nbib
-Scopus,Scopus,2026-02-11,1061,scopus_strategy.txt,scopus_2026-02-11.ris</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: pubmed_strategy.txt</summary>
-        <pre><code>Database: MEDLINE via PubMed
+Scopus,Scopus,2026-02-11,1061,scopus_strategy.txt,scopus_2026-02-11.ris</code></pre></details>
+<details class="details"><summary>Example final search strategy</summary><pre><code>Database: MEDLINE via PubMed
 Date searched: 2026-02-10
 Results: 842
 
 ("disease model"[Title/Abstract] OR ...)
 AND
-("intervention"[Title/Abstract] OR ...)</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: deduplication_notes.md</summary>
-        <pre><code># Deduplication
+("intervention"[Title/Abstract] OR ...)</code></pre></details>
+<details class="details"><summary>Example deduplication_notes.md</summary><pre><code># Deduplication
 
 Software: Zotero 7.0
 Input files:
@@ -248,15 +193,13 @@ Input files:
 Records before deduplication: 1,903
 Records after deduplication: 1,522
 
-Automatic duplicate detection was followed by manual review of uncertain matches.</code></pre>
-      </details>
+Automatic duplicate detection was followed by manual review of uncertain matches.</code></pre></details>
+<div class="note"><strong>Why these files?</strong> PRISMA-S supports preserving the information needed to reproduce the search: database/platform, complete strategy, search date, retrieval count, and deduplication method.</div>
+</div></section>
 
-      <p class="basis"><strong>Basis:</strong> PRISMA-S emphasizes reporting the information needed to reproduce bibliographic searches, including databases/platforms, complete strategies, dates, record counts, and deduplication methods.</p>
-    </section>
-
-    <section class="stage" id="screening">
-      <div class="stage-head"><span>04</span><div><h2>Screening</h2><p>Keep the rules used by reviewers, platform exports, reviewer decisions, adjudication, and the final screening dataset.</p></div></div>
-      <pre><code>04_SCREENING/
+<section class="section" id="screening"><div class="section-card">
+<div class="stage-title"><div class="num">04</div><div><h2>Screening</h2><p>Rules, training, platform exports, reviewer decisions, adjudication, and final screening data.</p></div></div>
+<pre class="tree"><code>04_SCREENING/
 ├── 01_Guide/
 ├── 02_Training/
 ├── 03_Platform_exports/
@@ -265,28 +208,14 @@ Automatic duplicate detection was followed by manual review of uncertain matches
 ├── 06_Adjudication/
 ├── 07_Final_data/
 └── Full_text_library/</code></pre>
-
-      <table class="file-table">
-        <thead><tr><th>Folder</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>01_Guide</code></td><td>Eligibility criteria, decision rules, examples of ambiguous cases</td><td>Yes</td></tr>
-          <tr><td><code>02_Training</code></td><td>Pilot rounds and calibration exercises</td><td>Usually no</td></tr>
-          <tr><td><code>03_Platform_exports</code></td><td>Original Rayyan, Covidence, DistillerSR, or other exports</td><td>When useful and permitted</td></tr>
-          <tr><td><code>04_Title_abstract</code></td><td>Working title/abstract decisions if kept separately</td><td>Final data rather than every working file</td></tr>
-          <tr><td><code>05_Full_text</code></td><td>Full-text decisions and exclusion reasons</td><td>Yes, in final form</td></tr>
-          <tr><td><code>06_Adjudication</code></td><td>Conflicts and consensus decisions</td><td>Optional</td></tr>
-          <tr><td><code>07_Final_data</code></td><td>Curated screening dataset used for final counts</td><td>Yes</td></tr>
-          <tr><td><code>Full_text_library</code></td><td>Article PDFs used internally</td><td>No by default</td></tr>
-        </tbody>
-      </table>
-
-      <details class="example" open>
-        <summary>Example: screening_guide.md</summary>
-        <pre><code># Screening guide
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>01_Guide</code></td><td>Eligibility criteria, decision rules, and examples of ambiguous cases.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>02_Training</code></td><td>Pilot rounds and calibration exercises.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>03_Platform_exports</code></td><td>Original exports from Rayyan, Covidence, DistillerSR, or another platform.</td><td><span class="depends">When useful/shareable</span></td></tr><tr><td><code>04_Title_abstract</code></td><td>Working title/abstract decisions if stored separately.</td><td><span class="depends">Final form only</span></td></tr><tr><td><code>05_Full_text</code></td><td>Full-text decisions and exclusion reasons.</td><td><span class="yes">Final data</span></td></tr><tr><td><code>06_Adjudication</code></td><td>Conflicts and consensus decisions.</td><td><span class="depends">Optional</span></td></tr><tr><td><code>07_Final_data</code></td><td>Curated screening dataset used for final counts and the flowchart.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>Full_text_library</code></td><td>Article PDFs used internally.</td><td><span class="no">No by default</span></td></tr>
+</tbody></table>
+<details class="details" open><summary>Example screening_guide.md</summary><pre><code># Screening guide
 
 ## Include when
 - Original preclinical study
-- Relevant disease or experimental model
+- Relevant experimental model
 - Intervention matches the protocol
 - At least one eligible outcome is reported
 
@@ -297,24 +226,18 @@ Automatic duplicate detection was followed by manual review of uncertain matches
 - Wrong intervention
 
 ## Ambiguous cases
-If model eligibility cannot be determined from the abstract, include for full-text assessment.</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: screening_final.csv</summary>
-        <pre><code>record_id,title_abstract_decision,full_text_decision,exclusion_reason
+If eligibility cannot be determined from the abstract, include for full-text assessment.</code></pre></details>
+<details class="details"><summary>Example screening_final.csv</summary><pre><code>record_id,title_abstract_decision,full_text_decision,exclusion_reason
 R0001,include,include,
 R0002,include,exclude,Wrong population
 R0003,exclude,,Wrong study design
-R0004,include,exclude,No eligible outcome</code></pre>
-      </details>
+R0004,include,exclude,No eligible outcome</code></pre></details>
+<div class="note"><strong>Why share the guide?</strong> The final decisions show what was included or excluded. The guide shows how the team interpreted the eligibility criteria while making those decisions.</div>
+</div></section>
 
-      <p class="basis"><strong>Why keep the guide?</strong> Final decisions alone do not show how eligibility criteria were interpreted in practice. The guide documents the rules that reviewers actually used.</p>
-    </section>
-
-    <section class="stage" id="extraction">
-      <div class="stage-head"><span>05</span><div><h2>Data extraction</h2><p>Store the extraction instructions, form or template, reviewer entries, adjudication, and final extracted data.</p></div></div>
-      <pre><code>05_EXTRACTION/
+<section class="section" id="extraction"><div class="section-card">
+<div class="stage-title"><div class="num">05</div><div><h2>Data extraction</h2><p>Instructions, form/template, reviewer entries, adjudication, final data, and decision log.</p></div></div>
+<pre class="tree"><code>05_EXTRACTION/
 ├── 01_Guide/
 ├── 02_Training/
 ├── 03_Template_or_form/
@@ -323,63 +246,37 @@ R0004,include,exclude,No eligible outcome</code></pre>
 ├── 06_Adjudication/
 ├── 07_Final_data/
 └── 08_Decision_log/</code></pre>
-
-      <table class="file-table">
-        <thead><tr><th>Folder</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>01_Guide</code></td><td>Definitions, allowed values, units, source rules, conversions</td><td>Yes</td></tr>
-          <tr><td><code>02_Training</code></td><td>Pilot extraction and calibration</td><td>Usually no</td></tr>
-          <tr><td><code>03_Template_or_form</code></td><td>Blank Excel sheet, REDCap form, Google Form, Covidence form, etc.</td><td>Yes when shareable</td></tr>
-          <tr><td><code>04_Platform_exports</code></td><td>Original platform exports</td><td>When useful and permitted</td></tr>
-          <tr><td><code>05_Reviewer_entries</code></td><td>Individual extractions when extraction is duplicated</td><td>Optional</td></tr>
-          <tr><td><code>06_Adjudication</code></td><td>Resolved disagreements and consensus records</td><td>Optional</td></tr>
-          <tr><td><code>07_Final_data</code></td><td>Curated dataset used for reporting or analysis</td><td>Yes</td></tr>
-          <tr><td><code>08_Decision_log</code></td><td>Late exclusions, changes in variable interpretation, conversions, special cases</td><td>Relevant decisions should be shared</td></tr>
-        </tbody>
-      </table>
-
-      <details class="example" open>
-        <summary>Example: extraction_guide.md</summary>
-        <pre><code># Data extraction guide
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>01_Guide</code></td><td>Definitions, allowed values, units, source rules, and conversions.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>02_Training</code></td><td>Pilot extraction and calibration.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>03_Template_or_form</code></td><td>Blank spreadsheet, form, REDCap instrument, Covidence form, or equivalent.</td><td><span class="yes">When shareable</span></td></tr><tr><td><code>04_Platform_exports</code></td><td>Original platform export.</td><td><span class="depends">When useful/shareable</span></td></tr><tr><td><code>05_Reviewer_entries</code></td><td>Individual extractions when extraction is duplicated.</td><td><span class="depends">Optional</span></td></tr><tr><td><code>06_Adjudication</code></td><td>Resolved disagreements and consensus records.</td><td><span class="depends">Optional</span></td></tr><tr><td><code>07_Final_data</code></td><td>Curated dataset used for reporting or analysis.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>08_Decision_log</code></td><td>Late exclusions, interpretation changes, conversions, and special cases.</td><td><span class="depends">Share relevant decisions</span></td></tr>
+</tbody></table>
+<details class="details" open><summary>Example extraction_guide.md</summary><pre><code># Data extraction guide
 
 ## study_id
 Unique ID assigned to each included study.
 
 ## species
-Report the species exactly as described by the authors.
+Report the species as described by the authors.
 Use "NR" when not reported.
 
 ## sample_size
 Extract the number of animals contributing to the reported outcome.
-Do not use the total number enrolled if attrition occurred before outcome measurement.
 
 ## outcome_source
 Allowed values: table, text, figure, supplementary material, author contact.
 
 ## notes
-Record any interpretation or conversion that may affect the final value.</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: extracted_data.csv</summary>
-        <pre><code>study_id,species,sex,sample_size,outcome,timepoint,value,unit,outcome_source
+Record any interpretation or conversion that may affect the final value.</code></pre></details>
+<details class="details"><summary>Example extracted_data.csv</summary><pre><code>study_id,species,sex,sample_size,outcome,timepoint,value,unit,outcome_source
 S001,Rattus norvegicus,male,10,Lesion volume,7 days,42.1,mm3,figure
-S002,Mus musculus,female,12,Behavior score,14 days,6.2,points,table</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: decision_log.csv</summary>
-        <pre><code>date,study_id,issue,decision,reason
+S002,Mus musculus,female,12,Behavior score,14 days,6.2,points,table</code></pre></details>
+<details class="details"><summary>Example decision_log.csv</summary><pre><code>date,study_id,issue,decision,reason
 2026-07-02,S014,Outcome reported as SEM,Converted SEM to SD,Needed for quantitative synthesis
-2026-07-05,S027,Eligibility changed during extraction,Study excluded,Intervention did not meet protocol definition</code></pre>
-      </details>
+2026-07-05,S027,Eligibility changed during extraction,Study excluded,Intervention did not meet protocol definition</code></pre></details>
+</div></section>
 
-      <p class="basis"><strong>Basis:</strong> PRISMA 2020 recommends stating where data collection forms and extracted data are publicly available. The separation between original entries, adjudication, and final data is a BRISA workflow recommendation for traceability.</p>
-    </section>
-
-    <section class="stage" id="assessment">
-      <div class="stage-head"><span>06</span><div><h2>Assessment</h2><p>Risk of bias, reporting quality, or another structured assessment.</p></div></div>
-      <pre><code>06_ASSESSMENT/
+<section class="section" id="assessment"><div class="section-card">
+<div class="stage-title"><div class="num">06</div><div><h2>Assessment</h2><p>Risk of bias, reporting quality, or another structured assessment.</p></div></div>
+<pre class="tree"><code>06_ASSESSMENT/
 ├── Risk_of_bias/
 │   ├── Guide/
 │   ├── Tool/
@@ -388,24 +285,11 @@ S002,Mus musculus,female,12,Behavior score,14 days,6.2,points,table</code></pre>
 │   ├── Adjudication/
 │   └── Final_data/
 └── Reporting_quality/
-    └── [same logic when applicable]</code></pre>
-
-      <p>Use the same subfolder logic for each assessment performed. Do not create <code>Reporting_quality</code> if it was not part of the review.</p>
-      <table class="file-table">
-        <thead><tr><th>Folder</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>Guide</code></td><td>Project-specific interpretation and decision rules</td><td>Yes</td></tr>
-          <tr><td><code>Tool</code></td><td>Tool name, version, citation, and any adaptations</td><td>Yes or link/citation</td></tr>
-          <tr><td><code>Training</code></td><td>Pilot assessments and calibration</td><td>Usually no</td></tr>
-          <tr><td><code>Reviewer_entries</code></td><td>Individual reviewer judgments</td><td>Optional</td></tr>
-          <tr><td><code>Adjudication</code></td><td>Consensus decisions and resolved conflicts</td><td>Optional</td></tr>
-          <tr><td><code>Final_data</code></td><td>Final judgments and support for judgments</td><td>Yes</td></tr>
-        </tbody>
-      </table>
-
-      <details class="example" open>
-        <summary>Example: risk_of_bias_guide.md</summary>
-        <pre><code># Risk-of-bias assessment guide
+    └── [same structure when applicable]</code></pre>
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>Guide</code></td><td>Project-specific interpretation and decision rules.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>Tool</code></td><td>Tool name, version, citation, and any adaptations.</td><td><span class="yes">Link/citation or file</span></td></tr><tr><td><code>Training</code></td><td>Pilot assessments and calibration.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>Reviewer_entries</code></td><td>Individual reviewer judgments.</td><td><span class="depends">Optional</span></td></tr><tr><td><code>Adjudication</code></td><td>Consensus decisions and resolved conflicts.</td><td><span class="depends">Optional</span></td></tr><tr><td><code>Final_data</code></td><td>Final judgments and support for judgments.</td><td><span class="yes">Yes</span></td></tr>
+</tbody></table>
+<details class="details" open><summary>Example risk_of_bias_guide.md</summary><pre><code># Risk-of-bias assessment guide
 
 Tool: SYRCLE Risk of Bias Tool
 
@@ -415,41 +299,25 @@ Unclear risk: authors state that allocation was random but provide no method.
 High risk: non-random allocation was used.
 
 ## Support for judgment
-Record the exact location in the article whenever possible.</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: risk_of_bias_final.csv</summary>
-        <pre><code>study_id,domain,judgment,support_for_judgment,source_location
+Record the article location whenever possible.</code></pre></details>
+<details class="details"><summary>Example risk_of_bias_final.csv</summary><pre><code>study_id,domain,judgment,support_for_judgment,source_location
 S001,Sequence generation,Low,"Computer-generated randomization",Methods p.4
 S001,Allocation concealment,Unclear,"Not described",Methods
-S002,Sequence generation,High,"Animals allocated by cage number",Methods p.3</code></pre>
-      </details>
-    </section>
+S002,Sequence generation,High,"Animals allocated by cage number",Methods p.3</code></pre></details>
+</div></section>
 
-    <section class="stage" id="analysis">
-      <div class="stage-head"><span>07</span><div><h2>Analysis</h2><p>Files needed to understand and reproduce analyses. This section is not restricted to meta-analysis.</p></div></div>
-      <pre><code>07_ANALYSIS/
+<section class="section" id="analysis"><div class="section-card">
+<div class="stage-title"><div class="num">07</div><div><h2>Analysis</h2><p>Files needed to reproduce the analysis. This folder is not limited to meta-analysis.</p></div></div>
+<pre class="tree"><code>07_ANALYSIS/
 ├── 01_Input_data/
 ├── 02_Analysis_files/
 ├── 03_Derived_data/
 ├── 04_Software_environment/
 └── 05_Analysis_outputs/</code></pre>
-
-      <table class="file-table">
-        <thead><tr><th>Folder</th><th>Store here</th><th>Public release?</th></tr></thead>
-        <tbody>
-          <tr><td><code>01_Input_data</code></td><td>Exact dataset imported into the analysis</td><td>Yes</td></tr>
-          <tr><td><code>02_Analysis_files</code></td><td>R scripts, Rmd, jamovi files, RevMan files, Stata/SPSS syntax, spreadsheets, Python notebooks, etc.</td><td>Yes</td></tr>
-          <tr><td><code>03_Derived_data</code></td><td>Effect sizes, transformed datasets, model-ready files, derived variables</td><td>Yes when needed to reproduce results</td></tr>
-          <tr><td><code>04_Software_environment</code></td><td>Software versions, package versions, session information, environment files</td><td>Recommended when relevant</td></tr>
-          <tr><td><code>05_Analysis_outputs</code></td><td>Model summaries, analysis-generated tables and plots</td><td>When useful</td></tr>
-        </tbody>
-      </table>
-
-      <details class="example" open>
-        <summary>Example: analysis_README.md</summary>
-        <pre><code># Analysis
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>01_Input_data</code></td><td>Exact dataset imported into the analysis.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>02_Analysis_files</code></td><td>R scripts/Rmd, jamovi files, RevMan files, Stata/SPSS syntax, spreadsheets, Python notebooks, or equivalent.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>03_Derived_data</code></td><td>Effect sizes, transformed datasets, model-ready files, derived variables.</td><td><span class="yes">When needed</span></td></tr><tr><td><code>04_Software_environment</code></td><td>Software/package versions, session information, environment files.</td><td><span class="depends">Recommended when relevant</span></td></tr><tr><td><code>05_Analysis_outputs</code></td><td>Model summaries, analysis-generated tables and plots.</td><td><span class="depends">When useful</span></td></tr>
+</tbody></table>
+<details class="details" open><summary>Example analysis_README.md</summary><pre><code># Analysis
 
 ## Software
 R 4.5.1
@@ -460,281 +328,126 @@ metafor 4.8-0
 02_Analysis_files/01_prepare_data.R
 02_Analysis_files/02_meta_analysis.R
 03_Derived_data/effect_sizes.csv
-05_Analysis_outputs/model_results.csv
 
-## Order
+## Run order
 1. Run 01_prepare_data.R
 2. Run 02_meta_analysis.R
-3. Generated files are written to 03_Derived_data and 05_Analysis_outputs</code></pre>
-      </details>
+3. Generated figures are saved in 05_Analysis_outputs/</code></pre></details>
+<div class="note"><strong>Software independence.</strong> If the analysis was done in RevMan, jamovi, Excel, Stata, SPSS, or another program, store the native project/analysis files and an export of the analysis data when possible.</div>
+</div></section>
 
-      <details class="example">
-        <summary>Example when using software without scripts</summary>
-        <pre><code>07_ANALYSIS/
-├── 01_Input_data/
-│   └── analysis_input.csv
-├── 02_Analysis_files/
-│   └── analysis.omv
-├── 03_Derived_data/
-│   └── analysis_results.csv
-├── 04_Software_environment/
-│   └── software_notes.md
-└── 05_Analysis_outputs/
-    └── forest_plot.svg</code></pre>
-        <p class="example-note">The same structure works for jamovi, RevMan, SPSS, Stata, Excel, or another analysis platform. Preserve the native analysis file and export important results to open or widely readable formats when possible.</p>
-      </details>
-    </section>
-
-    <section class="stage" id="outputs">
-      <div class="stage-head"><span>08</span><div><h2>Outputs</h2><p>Final figures, tables, flow diagrams, and supplementary materials.</p></div></div>
-      <pre><code>08_OUTPUTS/
+<section class="section" id="outputs"><div class="section-card">
+<div class="stage-title"><div class="num">08</div><div><h2>Outputs</h2><p>Final tables, figures, flow diagrams, and supplementary materials.</p></div></div>
+<pre class="tree"><code>08_OUTPUTS/
 ├── PRISMA_flowchart/
 ├── Figures/
 ├── Tables/
 └── Supplementary_material/</code></pre>
-      <p>This folder may be used whether or not the review includes a meta-analysis.</p>
-      <details class="example">
-        <summary>Example: outputs_README.md</summary>
-        <pre><code># Outputs
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>PRISMA_flowchart</code></td><td>Editable/source version and final exported figure where available.</td><td><span class="yes">Yes</span></td></tr><tr><td><code>Figures</code></td><td>Final figures and, when useful, editable/source versions.</td><td><span class="depends">Usually yes</span></td></tr><tr><td><code>Tables</code></td><td>Final tables and supporting tabular files.</td><td><span class="depends">Usually yes</span></td></tr><tr><td><code>Supplementary_material</code></td><td>Supplementary files prepared for the manuscript.</td><td><span class="depends">When relevant</span></td></tr>
+</tbody></table>
+<details class="details"><summary>Example outputs_README.md</summary><pre><code># Outputs
 
-PRISMA_flowchart/prisma_flow.svg
-Figures/figure_1_study_characteristics.svg
-Tables/table_1_characteristics.csv
-Supplementary_material/supplementary_table_2.csv
+PRISMA_flowchart/prisma_flowchart.svg  Final editable flow diagram
+Figures/figure_1_forest_plot.svg       Figure generated by analysis script 03
+Tables/table_1_study_characteristics.csv  Data underlying manuscript Table 1</code></pre></details>
+</div></section>
 
-Figures are stored in SVG when possible. Tabular outputs are also stored as CSV when practical.</code></pre>
-      </details>
-    </section>
-
-    <section class="stage" id="manuscript">
-      <div class="stage-head"><span>09</span><div><h2>Manuscript</h2><p>Drafting and submission files.</p></div></div>
-      <pre><code>09_MANUSCRIPT/
+<section class="section" id="manuscript"><div class="section-card">
+<div class="stage-title"><div class="num">09</div><div><h2>Manuscript</h2><p>Writing and submission files.</p></div></div>
+<pre class="tree"><code>09_MANUSCRIPT/
 ├── Drafts/
 ├── References/
 └── Submission/</code></pre>
-      <p>Keep manuscript versions, bibliography files, cover letters, reviewer-response files, and journal submission material here. These files are normally separate from the public data release unless the journal or team has a specific reason to include them.</p>
-    </section>
+<table class="folder-table"><thead><tr><th>Folder</th><th>Store here</th><th>Public release</th></tr></thead><tbody>
+<tr><td><code>Drafts</code></td><td>Working manuscript versions.</td><td><span class="no">No</span></td></tr><tr><td><code>References</code></td><td>BibTeX, RIS, EndNote/Zotero exports, or citation files.</td><td><span class="no">Usually no</span></td></tr><tr><td><code>Submission</code></td><td>Submitted manuscript, cover letter, response files, journal forms.</td><td><span class="no">Usually no</span></td></tr>
+</tbody></table>
+</div></section>
 
-    <section class="stage" id="release">
-      <div class="stage-head"><span>10</span><div><h2>Public release</h2><p>A curated set of files prepared from the internal workspace.</p></div></div>
-      <p>The public release should contain enough information for another researcher to understand what was done and inspect or reproduce the reported results. It does not need to contain every internal file.</p>
-      <pre><code>10_PUBLIC_RELEASE/
+<section class="section" id="release"><div class="section-card">
+<div class="stage-title"><div class="num">10</div><div><h2>Public release</h2><p>A curated set of final, shareable files prepared from the internal workspace.</p></div></div>
+<p>The public release should be understandable without access to the team's Drive or screening/extraction platform. Do not create empty folders for steps that were not performed.</p>
+<pre class="tree"><code>10_PUBLIC_RELEASE/
 ├── README.md
 ├── LICENSE
-├── dataset_description.json        # recommended
 ├── protocol/
 ├── search/
 ├── screening/
 ├── extraction/
-├── assessment/                     # when applicable
-├── analysis/                       # when applicable
-└── outputs/</code></pre>
+├── assessment/        # when applicable
+├── analysis/          # when applicable
+└── outputs/           # when applicable</code></pre>
+<div class="release-list">
+  <div class="release-item"><strong>Protocol</strong><span>Final protocol, registration link/record, relevant amendments.</span></div>
+  <div class="release-item"><strong>Search</strong><span>Final strategies, search log, deduplication documentation, shareable exports.</span></div>
+  <div class="release-item"><strong>Screening</strong><span>Screening guide, final screening data, full-text exclusion reasons.</span></div>
+  <div class="release-item"><strong>Extraction</strong><span>Extraction guide, form/template, final extracted data, data dictionary or variable documentation.</span></div>
+  <div class="release-item"><strong>Assessment</strong><span>Guide, tool/version information, final assessment data.</span></div>
+  <div class="release-item"><strong>Analysis</strong><span>Input data, analysis files, relevant derived data, software information.</span></div>
+  <div class="release-item"><strong>Outputs</strong><span>PRISMA flowchart, figures, tables, and relevant supplementary materials.</span></div>
+  <div class="release-item"><strong>README + license</strong><span>Explain what each file is, related publication, citation, software, and reuse conditions.</span></div>
+</div>
+<details class="details" open><summary>Example public README.md</summary><pre><code># Review title
 
-      <h3>What moves from the internal workspace</h3>
-      <table class="file-table wide">
-        <thead><tr><th>Internal material</th><th>Public release</th></tr></thead>
-        <tbody>
-          <tr><td>Protocol drafts</td><td>Final protocol and relevant amendments only</td></tr>
-          <tr><td>Search development files</td><td>Final executed strategies, search log, deduplication description</td></tr>
-          <tr><td>Original database exports</td><td>Include only when redistribution is permitted</td></tr>
-          <tr><td>Screening training</td><td>Usually omit</td></tr>
-          <tr><td>Screening guide</td><td>Include</td></tr>
-          <tr><td>Working screening files</td><td>Final screening data and exclusion reasons</td></tr>
-          <tr><td>Extraction training</td><td>Usually omit</td></tr>
-          <tr><td>Extraction guide/template</td><td>Include</td></tr>
-          <tr><td>Reviewer extraction entries</td><td>Optional; final curated data are expected</td></tr>
-          <tr><td>Risk-of-bias/reporting-quality guide</td><td>Include when assessment was performed</td></tr>
-          <tr><td>Analysis working files</td><td>Include the files needed to reproduce the reported analysis</td></tr>
-          <tr><td>Full-text PDFs</td><td>Do not include by default</td></tr>
-          <tr><td>Figures/tables/PRISMA</td><td>Include relevant final outputs</td></tr>
-        </tbody>
-      </table>
-
-      <details class="example" open>
-        <summary>Example: public README.md</summary>
-        <pre><code># Data and materials for [review title]
-
-This repository contains the materials associated with:
-[full citation or preprint citation]
+This repository contains data and materials supporting the systematic review:
+[full citation or manuscript DOI]
 
 ## Contents
-protocol/       Final protocol and amendments
-search/         Search strategies, search log, and deduplication notes
-screening/      Screening guide and final decisions
-extraction/     Extraction guide, template, and final extracted data
-assessment/     Risk-of-bias or reporting-quality data, when applicable
-analysis/       Analysis input, files, derived data, and software information
-outputs/        PRISMA flow diagram, figures, and tables
+protocol/     Final protocol and amendments
+search/       Search strategies and search log
+screening/    Screening guide and final decisions
+extraction/   Extraction guide and final extracted data
+assessment/   Risk-of-bias materials
+analysis/     Analysis data and analysis files
+outputs/      Flowchart, figures, and tables
 
-## Licenses
-Data: CC BY 4.0
-Code: MIT
+## Software
+Screening: Rayyan
+Analysis: R 4.5.1
+
+## License
+Data: [license]
+Code: [license]
 
 ## Contact
-[corresponding author or project contact]</code></pre>
-      </details>
+[project contact]</code></pre></details>
+<div class="note caution"><strong>Do not automatically publish:</strong> full-text article PDFs, personal contact information, confidential meeting material, or database/platform exports whose license does not allow redistribution.</div>
+</div></section>
 
-      <details class="example">
-        <summary>Example: dataset_description.json</summary>
-        <pre><code>{
-  "title": "Data and materials for [review title]",
-  "review_type": "preclinical systematic review",
-  "meta_analysis": true,
-  "related_publication": "https://doi.org/...",
-  "registration": "https://...",
-  "data_license": "CC-BY-4.0",
-  "code_license": "MIT",
-  "version": "1.0.0"
-}</code></pre>
-        <p class="example-note">This file is recommended rather than required. It provides a small machine-readable summary of the release, following the general idea used by BIDS to pair human-readable documentation with structured metadata.</p>
-      </details>
-
-      <details class="example">
-        <summary>Example: review without meta-analysis</summary>
-        <pre><code>10_PUBLIC_RELEASE/
-├── README.md
-├── LICENSE
-├── protocol/
-├── search/
-├── screening/
-├── extraction/
-├── assessment/
-└── outputs/</code></pre>
-      </details>
-
-      <details class="example">
-        <summary>Example: review with meta-analysis</summary>
-        <pre><code>10_PUBLIC_RELEASE/
-├── README.md
-├── LICENSE
-├── protocol/
-├── search/
-├── screening/
-├── extraction/
-├── assessment/
-├── analysis/
-│   ├── input_data/
-│   ├── analysis_files/
-│   ├── derived_data/
-│   └── software_environment/
-└── outputs/</code></pre>
-      </details>
-
-      <p class="basis"><strong>Basis:</strong> PRISMA 2020 item 27 asks authors to report the availability of data collection forms, extracted data, analysis data, analytic code, and other review materials. FAIR principles support persistent identifiers, clear metadata, licenses, provenance, and reusable formats.</p>
-    </section>
-
-    <section id="repository">
-      <h2>Choosing a repository</h2>
-      <p>Choose the repository after the public release has been prepared. The same folder can be deposited in different repositories, but the repository should provide stable access, appropriate metadata, and a persistent identifier when possible.</p>
-
-      <div class="repository-steps">
-        <div><strong>1. Check requirements first</strong><p>If the journal, funder, institution, or research community requires a specific repository, follow that requirement.</p></div>
-        <div><strong>2. Prefer a suitable domain or institutional repository</strong><p>If a trusted repository already serves the relevant discipline or institution, it may provide better metadata, preservation, or curation than a general repository.</p></div>
-        <div><strong>3. Otherwise use a trusted general repository</strong><p>Look for DOI or another persistent identifier, versioning, clear licensing, long-term preservation, adequate file limits, and accessible metadata.</p></div>
-      </div>
-
-      <h3>Common options</h3>
-      <div class="repo-table-wrap">
-        <table class="file-table wide">
-          <thead><tr><th>Repository</th><th>Useful when</th><th>Points to consider</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Zenodo</strong></td><td>You need a general-purpose research repository with DOI, versioning, and GitHub integration.</td><td>Good default for citable data/code releases. GitHub releases can be archived in Zenodo and assigned DOIs.</td></tr>
-            <tr><td><strong>Dataverse</strong></td><td>Your institution or community provides a Dataverse installation and you want dataset-focused metadata and versioning.</td><td>Features and policies depend on the specific Dataverse installation.</td></tr>
-            <tr><td><strong>Figshare</strong></td><td>Your institution uses Figshare or you want a general-purpose repository with DOI and versioning.</td><td>Storage limits and institutional services vary.</td></tr>
-            <tr><td><strong>GitHub</strong></td><td>The main research object is code, documentation, a website, or a version-controlled workflow.</td><td>Use GitHub for development and transparency; pair it with Zenodo or another repository when a DOI and archival research record are needed.</td></tr>
-            <tr><td><strong>OSF Registration</strong></td><td>You need a time-stamped registration or frozen record of a protocol/workflow.</td><td>Useful for registration. OSF Projects are being phased out as general project workspaces and will become read-only in 2027.</td></tr>
-            <tr><td><strong>Institutional or domain repository</strong></td><td>A suitable repository is supported by your institution or field.</td><td>Often preferred when it satisfies funder, journal, discipline, preservation, and metadata requirements.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Repository selector</h3>
-      <p>Use this as a starting point rather than a formal recommendation.</p>
-      <form class="selector" id="repo-selector">
-        <label>Does your journal, funder, institution, or field require a specific repository?
-          <select id="required-repo">
-            <option value="no">No / not sure</option>
-            <option value="yes">Yes</option>
-          </select>
-        </label>
-        <label>Is there a trusted domain-specific or institutional data repository that accepts your data?
-          <select id="domain-repo">
-            <option value="no">No / not sure</option>
-            <option value="yes">Yes</option>
-          </select>
-        </label>
-        <label>Is the release mainly code or a GitHub-based reproducible workflow?
-          <select id="github-code">
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
-          </select>
-        </label>
-        <label>Do you mainly need a general citable repository for data and supporting files?
-          <select id="general-data">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-        </label>
-        <button type="button" id="repo-button">Show a starting option</button>
-      </form>
-      <div id="repo-result" class="selector-result" aria-live="polite">Answer the questions above to get a starting option.</div>
-
-      <div class="callout subtle">
-        <strong>Still unsure?</strong> Use <a href="https://www.re3data.org/" target="_blank" rel="noreferrer">re3data</a> to search research data repositories by discipline, persistent identifier, access conditions, licensing, and other repository characteristics. FAIRsharing can also be used to identify repositories, standards, and data policies.
-      </div>
-
-      <p class="basis"><strong>Current OSF note:</strong> COS has announced that new OSF Projects will no longer be created after November 16, 2026 and existing Projects will become read-only on February 19, 2027. Existing public content remains accessible, while OSF Registrations and Preprints continue. For new long-term data releases, do not assume OSF Projects will remain a general-purpose repository workflow.</p>
-    </section>
-
-    <section id="references">
-      <h2>References and rationale</h2>
-      <div class="references">
-        <article><h3>PRISMA 2020</h3><p>Used for the expectation that systematic reviews report where review materials, extracted data, analysis data, and analytic code are available.</p><a href="https://www.prisma-statement.org/prisma-2020" target="_blank" rel="noreferrer">PRISMA 2020</a></article>
-        <article><h3>PRISMA-S</h3><p>Used for search documentation, including complete search strategies, databases/platforms, search dates, retrieval counts, and deduplication reporting.</p><a href="https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-020-01542-z" target="_blank" rel="noreferrer">PRISMA-S</a></article>
-        <article><h3>FAIR principles</h3><p>Used for persistent identifiers, metadata, licenses, provenance, and reuse-oriented data sharing.</p><a href="https://www.go-fair.org/fair-principles/" target="_blank" rel="noreferrer">FAIR principles</a></article>
-        <article><h3>BIDS</h3><p>Used as an example of a community data convention that separates human-readable documentation, structured metadata, consistent organization, and machine-readable validation.</p><a href="https://bids.neuroimaging.io/" target="_blank" rel="noreferrer">BIDS</a></article>
-        <article><h3>BRISA examples</h3><p>Existing BRISA projects illustrate different ways of sharing data and analysis files. This guide is intended to provide a more consistent structure without requiring a single analysis platform.</p><p><a href="https://github.com/matheusglls/NMDA-sb" target="_blank" rel="noreferrer">NMDA-sb</a> · <a href="https://github.com/BRISAcollab/social-zebrafish" target="_blank" rel="noreferrer">Social Zebrafish</a> · <a href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">BRISA website</a></p></article>
-        <article><h3>Repository directories</h3><p>re3data and FAIRsharing can help identify repositories and policies appropriate for specific types of research data.</p><p><a href="https://www.re3data.org/" target="_blank" rel="noreferrer">re3data</a> · <a href="https://fairsharing.org/" target="_blank" rel="noreferrer">FAIRsharing</a></p></article>
-      </div>
-    </section>
-
-    <footer>
-      <img src="https://static.wixstatic.com/media/f7c9a2_13fff47ff6494c4d843a3193df0d2d49~mv2.png/v1/fill/w_660%2Ch_290%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/logo5.png" alt="BRISA logo">
-      <p>BRISA Review Data Guide</p>
-      <p><a href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">www.reprodutibilidade.org/brisa</a></p>
-    </footer>
-  </main>
+<section class="section" id="repository"><div class="section-card">
+<h2>Choosing a repository</h2>
+<p>Prepare the public release first, then choose where it will be deposited. The repository should fit the project and any journal, funder, or institutional requirements.</p>
+<h3>Use this order</h3>
+<ol class="plain-steps"><li><strong>Check mandatory requirements.</strong> If a journal, funder, institution, or discipline requires a repository, use that option first.</li><li><strong>Check for a suitable domain or institutional repository.</strong> Prefer it when it offers appropriate preservation, metadata, and support.</li><li><strong>Otherwise choose a trusted general repository.</strong> Compare persistent identifiers, versioning, licensing, storage, metadata, and access.</li><li><strong>Use GitHub for active version control and websites/code.</strong> For a citable archived release, pair it with an archival repository such as Zenodo when appropriate.</li></ol>
+<h3>Repository checklist</h3>
+<ul class="checklist"><li>Does it provide a DOI or another persistent identifier?</li><li>Can the deposited version remain available long term?</li><li>Does it support versioning for updates?</li><li>Can you assign a clear license?</li><li>Are the file size and file type limits suitable?</li><li>Does it provide enough metadata to describe the review?</li><li>Does the journal/funder accept it?</li><li>If access restrictions are needed, does the repository support them?</li></ul>
+<h3>Common options</h3>
+<div class="repo-grid">
+  <div class="repo-card"><h3>Institutional or domain repository</h3><p>Best starting point when your institution, funder, journal, or research community provides or requires one.</p></div>
+  <div class="repo-card"><h3>Zenodo</h3><p>General-purpose option for data, code, and supporting files. Useful for DOI-based releases and GitHub archiving.</p></div>
+  <div class="repo-card"><h3>Dataverse</h3><p>Useful for dataset-focused deposits when an institutional or community Dataverse installation is available.</p></div>
+  <div class="repo-card"><h3>Figshare</h3><p>General or institutional repository option for research files and datasets.</p></div>
+  <div class="repo-card"><h3>GitHub</h3><p>Useful for code, version-controlled documentation, and this type of website. It is not a substitute for an archival data repository when a persistent research record is required.</p></div>
+  <div class="repo-card"><h3>OSF Registrations</h3><p>Useful for time-stamped registrations and protocol records. Check current OSF policies before choosing OSF services for long-term file hosting.</p></div>
 </div>
+<div class="note"><strong>Need to compare repositories?</strong> Search <a href="https://www.re3data.org/" target="_blank" rel="noreferrer">re3data</a> or <a href="https://fairsharing.org/" target="_blank" rel="noreferrer">FAIRsharing</a> for discipline-specific and general repositories.</div>
+</div></section>
 
-<script>
-(function () {
-  const button = document.getElementById('repo-button');
-  const result = document.getElementById('repo-result');
-  button.addEventListener('click', function () {
-    const required = document.getElementById('required-repo').value;
-    const domain = document.getElementById('domain-repo').value;
-    const github = document.getElementById('github-code').value;
-    const general = document.getElementById('general-data').value;
+<section class="section" id="references"><div class="section-card">
+<h2>Sources and rationale</h2>
+<p class="muted">The folder structure is a BRISA organizational recommendation. The rationale draws on reporting, search documentation, open-data, and data-organization guidance.</p>
+<div class="refs">
+  <div class="ref"><strong>PRISMA 2020</strong><span>Availability of review materials, extracted data, analysis data, and analytic code.</span><a href="https://www.prisma-statement.org/prisma-2020" target="_blank" rel="noreferrer">Open source ↗</a></div>
+  <div class="ref"><strong>PRISMA-S</strong><span>Search strategies, databases/platforms, dates, retrieval counts, and deduplication reporting.</span><a href="https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-020-01542-z" target="_blank" rel="noreferrer">Open source ↗</a></div>
+  <div class="ref"><strong>FAIR principles</strong><span>Metadata, persistent identifiers, provenance, accessibility, and reuse.</span><a href="https://www.go-fair.org/fair-principles/" target="_blank" rel="noreferrer">Open source ↗</a></div>
+  <div class="ref"><strong>BIDS</strong><span>Used as an example of consistent folder organization, documentation, and extensible data conventions.</span><a href="https://bids.neuroimaging.io/" target="_blank" rel="noreferrer">Open source ↗</a></div>
+  <div class="ref"><strong>BRISA projects</strong><span>Existing BRISA projects show different software and data-sharing workflows.</span><a href="https://github.com/matheusglls/NMDA-sb" target="_blank" rel="noreferrer">NMDA-sb ↗</a> &nbsp; <a href="https://github.com/BRISAcollab/social-zebrafish" target="_blank" rel="noreferrer">Social Zebrafish ↗</a></div>
+  <div class="ref"><strong>BRISA</strong><span>Brazilian Reproducibility Initiative in preclinical Systematic review and meta-Analysis.</span><a href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">BRISA website ↗</a></div>
+</div>
+</div></section>
 
-    if (required === 'yes') {
-      result.innerHTML = '<strong>Start with the required repository.</strong> Check whether it provides a persistent identifier, versioning, licensing, and adequate storage. If it does not support code well, GitHub can still be used alongside it for development.';
-      return;
-    }
-    if (domain === 'yes') {
-      result.innerHTML = '<strong>Start with the trusted domain-specific or institutional repository.</strong> These repositories often provide better discipline-specific metadata, curation, or institutional support than a general repository.';
-      return;
-    }
-    if (github === 'yes') {
-      result.innerHTML = '<strong>Use GitHub for the working code and documentation, and archive a release in Zenodo.</strong> This keeps version control on GitHub while providing a citable DOI and archived release in Zenodo.';
-      return;
-    }
-    if (general === 'yes') {
-      result.innerHTML = '<strong>Zenodo is a reasonable general starting option.</strong> It provides DOI assignment, versioning, and support for data, code, and other research objects. Also check whether your institution offers Dataverse, Figshare, or another supported repository.';
-      return;
-    }
-    result.innerHTML = '<strong>Compare institutional, Dataverse, Figshare, and other suitable repositories.</strong> Use re3data or FAIRsharing to identify options and compare persistent identifiers, versioning, licensing, storage limits, and access requirements.';
-  });
-})();
-</script>
+<footer><img src="brisa-logo.png" alt="BRISA logo"><div>BRISA Review Data Guide</div></footer>
+</main>
+</div>
 </body>
 </html>
