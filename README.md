@@ -1,8 +1,8 @@
-# BRISA Review Data Guide
+# BRISA Project Data Management and Sharing Guide
 
-This repository contains the BRISA Review Data Guide, a practical reference for organizing preclinical systematic review and meta-analysis projects and preparing files for a public repository.
+This repository contains the BRISA Project Data Management and Sharing Guide, the BRISA Quick Start, and downloadable project templates for preclinical systematic review and meta-analysis projects.
 
-The guide is intended to support a more consistent project structure across BRISA teams while allowing different software, platforms, and review designs. It separates two related tasks:
+The guide supports a consistent internal project structure across BRISA teams and separates two related records:
 
 - **Internal workspace:** the complete working record of the review, including drafts, original exports, training files, reviewer-level data, decisions, intermediate files, analyses, and final materials.
 - **Public release:** a curated set of final and shareable materials that allows another researcher to understand the review, inspect the data, and reproduce or reuse the work when applicable.
@@ -32,13 +32,21 @@ Each section includes:
 - whether the material is normally included in the public release;
 - built-in examples of key documents and datasets.
 
-The examples are recommendations, not a fixed list of required files. Projects may add, remove, or adapt folders depending on the review design and the software used.
+The Quick Start identifies BRISA requirements. The detailed guide distinguishes required, conditional, recommended, internal-only, and public-release materials. Groups outside BRISA may adapt the structure to their own institutional requirements.
+
+## Download packages
+
+- `downloads/BRISA_PROJECT_TEMPLATE_BLANK.zip`: standard folder structure and blank starting files.
+- `downloads/BRISA_PROJECT_TEMPLATE_WORKED_EXAMPLE.zip`: the same structure populated with synthetic examples.
+
+The packages are distributed with the website. No Google Drive access is required to download them.
 
 ## Repository files
 
 ```text
 index.html       Complete site, including embedded CSS
 brisa-logo.png   BRISA logo used by the site
+downloads/       Downloadable blank and worked-example project packages
 .nojekyll        Prevents GitHub Pages from processing the site with Jekyll
 LICENSE.md       License for the guide text and original materials
 README.md        Repository documentation
@@ -60,7 +68,7 @@ The site uses plain HTML and CSS and does not require a build system.
 
 - Edit page content directly in `index.html`.
 - The CSS is embedded in the `<style>` block near the top of `index.html`.
-- Keep `brisa-logo.png` in the repository root unless the image path is updated in the HTML.
+- Keep `brisa-logo.png` and the `downloads/` folder in the repository root unless their paths are updated in the HTML.
 
 ## Related BRISA resources
 
