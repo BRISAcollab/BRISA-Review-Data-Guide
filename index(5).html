@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="BRISA guide for managing, documenting, and sharing systematic review project files."><title>BRISA Project Data Management and Sharing Guide</title><style>
+:root{
+  --navy:#0b1b68;--blue:#24419a;--ink:#202536;--muted:#687083;--line:#dde3ee;
+  --soft:#f7f8fb;--paper:#fff;--blue-soft:#f3f6ff;--green:#256a47;--green-soft:#eef8f2;
+  --amber:#8b5e08;--amber-soft:#fff7e7;--red:#84515f;--red-soft:#fbf4f6;
+  --shadow:0 1px 2px rgba(20,31,70,.03),0 8px 28px rgba(20,31,70,.045)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--soft);color:var(--ink);font-family:Inter,Arial,"Helvetica Neue",Helvetica,sans-serif;line-height:1.58}
+a{color:var(--blue);text-underline-offset:3px}code,pre{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace}
+.site-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}.header-inner{height:68px;max-width:1260px;margin:auto;padding:0 28px;display:flex;align-items:center;gap:18px}.logo{width:106px;height:48px;object-fit:contain}.header-title{border-left:1px solid var(--line);padding-left:17px;line-height:1.2}.header-title strong{display:block;color:var(--navy);font-size:15px}.header-title span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.header-spacer{flex:1}.header-link{text-decoration:none;font-size:13px;font-weight:700;color:var(--navy);border:1px solid var(--line);padding:8px 11px;border-radius:8px}.header-link:hover{background:var(--blue-soft)}
+.shell{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,900px);gap:44px;padding:38px 28px 90px;justify-content:center}.sidebar{position:sticky;top:92px;align-self:start;max-height:calc(100vh - 112px);overflow:auto;padding-right:10px}.side-label{font-size:10px;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:#9299a8;margin:0 0 7px 10px}.side-group{margin-bottom:17px}.sidebar a{display:block;text-decoration:none;color:#5f6676;font-size:13px;padding:5px 10px;border-radius:7px}.sidebar a:hover{background:#fff;color:var(--navy)}
+main{min-width:0}.section{scroll-margin-top:88px;margin-bottom:28px}.hero,.section-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.hero{padding:40px 44px 36px}.kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:var(--blue);margin:0 0 9px}.hero h1{font-size:40px;line-height:1.07;letter-spacing:-.035em;color:var(--navy);margin:0 0 14px}.hero .lead{font-size:18px;line-height:1.55;color:#4f586d;max-width:760px;margin:0}.hero .intro{margin-top:20px;max-width:790px}.section-card{padding:30px 32px}h2{font-size:26px;line-height:1.2;color:var(--navy);letter-spacing:-.02em;margin:0 0 11px}h3{font-size:18px;color:var(--navy);margin:25px 0 9px}p{margin:0 0 13px}.muted{color:var(--muted)}
+.stage-title{display:flex;gap:13px;align-items:flex-start;margin-bottom:18px}.num{width:36px;height:36px;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}.stage-title h2{margin:1px 0 3px}.stage-title p{margin:0;color:var(--muted);font-size:14px}
+.two-structure{display:grid;grid-template-columns:1fr 48px 1fr;gap:12px;align-items:stretch;margin-top:20px}.structure-box{border:1px solid var(--line);border-radius:12px;padding:19px;background:#fff}.structure-box h3{margin:0 0 6px;font-size:18px}.structure-box p{font-size:14px;color:#596174;margin:0}.structure-box.internal{border-top:4px solid var(--blue)}.structure-box.public{border-top:4px solid var(--green)}.arrow{display:grid;place-items:center;font-size:24px;color:#9aa1b0}.flow-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8d94a2;font-weight:800;margin-top:10px}
+.note{border-left:3px solid var(--blue);background:var(--blue-soft);padding:13px 15px;border-radius:0 9px 9px 0;font-size:14px;margin:17px 0}.note.green{border-left-color:var(--green);background:var(--green-soft)}.note.caution{border-left-color:#c78a1e;background:var(--amber-soft)}
+.naming-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.mini-card{border:1px solid var(--line);border-radius:11px;padding:16px;background:#fff}.mini-card h3{margin:0 0 8px;font-size:16px}.mini-card ul{margin:0;padding-left:19px}.mini-card li{margin:5px 0;font-size:13.5px}.goodbad{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}.goodbad div{padding:11px 12px;border-radius:9px;font-size:13px}.good{background:var(--green-soft);color:#245d42}.bad{background:var(--red-soft);color:#784b58}.goodbad code{display:block;margin-top:4px;white-space:normal}
+.tree{background:#11182a;color:#f3f6ff;border-radius:11px;padding:17px 19px;overflow:auto;line-height:1.55;font-size:12.7px;margin:16px 0 20px}.folder-grid{display:grid;gap:12px}.folder-card{border:1px solid var(--line);border-radius:12px;padding:17px 18px;background:#fff}.folder-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.folder-name{font-size:14px;color:var(--navy);font-weight:800;background:#f4f6fc;padding:3px 6px;border-radius:5px}.folder-top p{margin:7px 0 0;color:#4f586d;font-size:13.5px;max-width:650px}.public-tag{font-size:11px;font-weight:800;border-radius:999px;padding:5px 8px;white-space:nowrap}.public-tag.yes{background:var(--green-soft);color:var(--green)}.public-tag.no{background:var(--red-soft);color:var(--red)}.public-tag.depends{background:var(--amber-soft);color:var(--amber)}.folder-meta{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line)}.meta-label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#9097a6;font-weight:800;margin-bottom:6px}.file-chips,.format-chips{display:flex;flex-wrap:wrap;gap:6px}.file-chips code{font-size:11.5px;color:#31406e;background:#f7f8fb;border:1px solid #e5e8ef;padding:4px 6px;border-radius:6px}.format-chips span{font-size:11px;color:#5c6475;background:#f7f8fb;border:1px solid #e5e8ef;padding:4px 6px;border-radius:999px}.why{margin-top:13px;padding:10px 12px;border-radius:8px;background:#f7f9ff;color:#4a5570;font-size:13px}.why strong{color:var(--navy)}
+.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.action-card{border:1px solid var(--line);border-radius:12px;padding:17px;background:#fff}.action-card strong{display:block;color:var(--navy);margin-bottom:6px}.action-card p{font-size:13.5px;color:#596174;margin:0}.steps{counter-reset:step;display:grid;gap:10px;margin:18px 0}.steps li{list-style:none;counter-increment:step;position:relative;padding:14px 16px 14px 50px;border:1px solid var(--line);border-radius:10px;background:#fff}.steps li:before{content:counter(step);position:absolute;left:14px;top:12px;width:25px;height:25px;border-radius:8px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}.download-card{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff}.download-card h3{margin-top:0}.download-button{display:inline-block;margin-top:8px;padding:10px 13px;border-radius:8px;background:var(--navy);color:#fff;text-decoration:none;font-weight:800;font-size:13px}.download-button:hover{background:var(--blue)}.status-key{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.status-key span{font-size:11px;font-weight:800;border-radius:999px;padding:6px 9px}.required{background:#e8efff;color:#204a9b}.conditional{background:var(--amber-soft);color:var(--amber)}.recommended{background:#f0f2f6;color:#596174}.internal{background:var(--red-soft);color:var(--red)}.release{background:var(--green-soft);color:var(--green)}
+.embedded-example{margin-top:14px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}.example-caption,.example-head{background:#f8f9fc;border-bottom:1px solid var(--line);padding:9px 12px;font-size:12px;color:#596174}.example-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.example-head strong{color:var(--navy)}.example-file{font-family:"SFMono-Regular",Consolas,monospace;color:#788092;font-size:11px}.document-body{padding:14px 15px;font-size:13px}.document-body h4{font-size:14px;color:var(--navy);margin:8px 0 5px}.document-body h4:first-child{margin-top:0}.document-body p,.document-body ul{margin:0 0 9px}.document-body ul{padding-left:18px}.table-scroll{overflow-x:auto}.data-example{border-collapse:collapse;width:100%;font-size:12px}.data-example th{background:#fbfbfd;color:#555e70;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em}.data-example th,.data-example td{padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}.data-example tr:last-child td{border-bottom:0}
+.release-map{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:11px;overflow:hidden;font-size:13px;margin-top:16px}.release-map th{background:#f7f8fb;text-align:left;color:#4f586d;font-size:11px;text-transform:uppercase;letter-spacing:.05em}.release-map th,.release-map td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}.release-map tr:last-child td{border-bottom:0}.release-map code{font-size:11.5px;color:var(--navy)}
+.repo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.repo-card{border:1px solid var(--line);border-radius:11px;padding:15px}.repo-card h3{margin:0 0 6px;font-size:16px}.repo-card p{font-size:13px;color:#596174;margin:0}.checklist{margin:12px 0 0;padding-left:20px}.checklist li{margin-bottom:6px}.refs{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ref{border:1px solid var(--line);border-radius:10px;padding:14px}.ref strong{display:block;color:var(--navy);font-size:14px}.ref span{display:block;color:var(--muted);font-size:12.5px;margin:4px 0 8px}.ref a{font-size:12.5px;font-weight:700}footer{text-align:center;padding:30px 0 0;color:#858c9b;font-size:12px}footer img{width:108px;height:48px;object-fit:contain;display:block;margin:0 auto 8px}
+@media(max-width:980px){.shell{grid-template-columns:1fr;gap:0;padding:25px 20px 70px}.sidebar{display:none}.hero{padding:34px 30px}.hero h1{font-size:35px}}
+@media(max-width:650px){.header-inner{padding:0 15px;height:62px}.logo{width:90px;height:42px}.header-title{display:none}.header-link{font-size:12px;padding:7px 9px}.shell{padding:18px 12px 50px}.hero,.section-card{padding:24px 19px;border-radius:13px}.hero h1{font-size:30px}.hero .lead{font-size:16.5px}.two-structure,.naming-grid,.folder-meta,.repo-grid,.refs,.action-grid,.download-grid{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.folder-top{flex-direction:column}.goodbad{grid-template-columns:1fr}.release-map{display:block;overflow-x:auto}.release-map th,.release-map td{min-width:150px}}
+</style></head><body>
+<header class="site-header"><div class="header-inner"><img class="logo" src="brisa-logo.png" alt="BRISA logo"><div class="header-title"><strong>Project Data Management and Sharing Guide</strong><span>Internal organization and public release preparation</span></div><div class="header-spacer"></div><a class="header-link" href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">BRISA website ↗</a></div></header>
+<div class="shell"><aside class="sidebar" aria-label="Page navigation">
+<div class="side-group"><p class="side-label">Start here</p><a href="#about">About this guide</a><a href="#quick-start">BRISA quick start</a><a href="#templates">Templates & examples</a><a href="#relationship">Internal vs public</a><a href="#file-rules">File naming & formats</a><a href="#workspace">Folder structure</a></div>
+<div class="side-group"><p class="side-label">Internal workspace</p><a href="#readme">00 README</a><a href="#admin">01 Administration</a><a href="#protocol">02 Protocol</a><a href="#search">03 Search</a><a href="#screening">04 Screening</a><a href="#extraction">05 Extraction</a><a href="#assessment">06 Assessment</a><a href="#analysis">07 Analysis</a><a href="#outputs">08 Outputs</a><a href="#manuscript">09 Manuscript</a></div>
+<div class="side-group"><p class="side-label">Sharing</p><a href="#release">10 Public release</a><a href="#repository">Public repository</a><a href="#references">Sources</a></div></aside><main>
+<section class="hero section" id="about"><p class="kicker">BRISA</p><h1>Project Data Management and Sharing Guide</h1><p class="lead">A common structure for managing preclinical systematic review and meta-analysis projects from the internal workspace to the public research record.</p><div class="intro"><p>The guide was developed to make BRISA projects easier to understand across teams, preserve the review workflow over time, and support transparency, reproducibility, and reuse of preclinical evidence-synthesis data.</p><p>BRISA teams should begin with the Quick Start and use the detailed sections when setting up or documenting each stage. Other research groups may adapt the structure to their own platforms, repositories, and institutional requirements.</p></div><div class="action-grid"><div class="action-card"><strong>Working on a BRISA project?</strong><p>Follow the required setup and storage rules in the Quick Start.</p></div><div class="action-card"><strong>Need a file-level explanation?</strong><p>Use the detailed guide for folder purposes, examples, formats, and sharing status.</p></div><div class="action-card"><strong>Adapting the guide?</strong><p>Retain the underlying documentation principles and define local institutional rules.</p></div></div></section>
+<section class="section" id="quick-start"><div class="section-card"><h2>BRISA quick start</h2><p>This section sets out the common starting point for BRISA projects. The detailed guide below explains the purpose and contents of each folder.</p><div class="note"><strong>Official workspace.</strong> The complete working record must be stored in the project folder within the BRISA Google Drive. Files kept only in personal accounts or on local devices are not the official project record.</div><ol class="steps"><li><strong>Create or locate the project folder in the BRISA Google Drive.</strong> Confirm that the project lead and the relevant BRISA coordinators have access.</li><li><strong>Copy the blank project template.</strong> Rename the root folder with the project short name and complete <code>00_START_HERE/README_FIRST.md</code>.</li><li><strong>Use the numbered folders throughout the project.</strong> Preserve original exports before cleaning, reconciling, or transforming them.</li><li><strong>Document every final dataset.</strong> Keep a data dictionary with the exact column names, definitions, allowed values, units, missing-value codes, and derivation rules.</li><li><strong>Keep final materials distinguishable from drafts and reviewer-level work.</strong> Use the final-data and public-release folders for curated files only.</li><li><strong>Prepare the public-release package before submission or publication.</strong> Do not publish restricted article PDFs, personal information, confidential records, or licensed exports that cannot be redistributed.</li></ol><h3>Minimum project record</h3><table class="release-map"><thead><tr><th>Material</th><th>BRISA status</th><th>Minimum record</th></tr></thead><tbody><tr><td>Project orientation</td><td><span class="required">Required</span></td><td>Current README, project status, tools, contacts, and folder notes.</td></tr><tr><td>Protocol and search</td><td><span class="required">Required</span></td><td>Final protocol, registration, amendments, executed strategies, search log, and preserved exports.</td></tr><tr><td>Screening and extraction</td><td><span class="required">Required</span></td><td>Guides, final reconciled decisions, final extracted data, and data dictionaries.</td></tr><tr><td>Structured assessment</td><td><span class="conditional">When applicable</span></td><td>Tool, project guide, final judgments, and data dictionary.</td></tr><tr><td>Analysis</td><td><span class="conditional">When applicable</span></td><td>Analysis-ready input, scripts, environment, run order, and relevant outputs.</td></tr><tr><td>Administration and working files</td><td><span class="internal">Internal only</span></td><td>Team records, meetings, training, reviewer entries, and drafts.</td></tr><tr><td>Curated public package</td><td><span class="release">Public release</span></td><td>Final shareable files selected according to the release checklist.</td></tr></tbody></table><p class="muted">The badges in the detailed folder cards describe public-sharing status. The table above defines the BRISA requirement level.</p><h3>How requirements are marked</h3><div class="status-key"><span class="required">Required for BRISA</span><span class="conditional">Required when applicable</span><span class="recommended">Recommended</span><span class="internal">Internal only</span><span class="release">Public release</span></div><div class="note caution"><strong>Public repository pending institutional decision.</strong> BRISA is evaluating the repository that will replace OSF for future releases. Teams should prepare the complete public-release package but should not treat an independently selected platform as the BRISA default. Existing public records should be preserved unless a migration plan is issued.</div></div></section>
+<section class="section" id="templates"><div class="section-card"><h2>Templates and examples</h2><p>The blank package provides the standard folder structure and editable starting files. The worked example uses synthetic records to show how the same structure can be completed. Example data must not be used as project data.</p><div class="download-grid"><div class="download-card"><h3>Blank project template</h3><p>Copy this package at the start of a BRISA project. It contains folder-level READMEs, blank documentation files, spreadsheet templates, and a public-release checklist.</p><a class="download-button" href="downloads/BRISA_PROJECT_TEMPLATE_BLANK.zip" download>Download blank template</a></div><div class="download-card"><h3>Worked example</h3><p>Use this package to inspect completed examples of search records, screening decisions, extracted data, data dictionaries, analysis files, and release documentation.</p><a class="download-button" href="downloads/BRISA_PROJECT_TEMPLATE_WORKED_EXAMPLE.zip" download>Download worked example</a></div></div><div class="note"><strong>File formats.</strong> Working spreadsheets are supplied as <code>.xlsx</code>; machine-readable examples and public data use <code>.csv</code>; instructions use <code>.md</code> or <code>.txt</code>; analysis code uses its native format. The packages do not create duplicate official versions without a stated purpose.</div></div></section>
+<section class="section" id="relationship"><div class="section-card"><h2>Internal workspace and public repository</h2><p>The two structures serve different stages of the same project.</p><div class="two-structure"><div class="structure-box internal"><h3>Internal workspace</h3><p>The complete working record of the review. It starts when the project starts and preserves drafts, original platform exports, training files, reviewer-level data, intermediate datasets, decisions, analysis files, and final materials.</p><div class="flow-label">Purpose: preserve how the work developed</div></div><div class="arrow">→</div><div class="structure-box public"><h3>Public repository</h3><p>A curated selection prepared from the internal workspace. It contains the files another researcher needs to understand how the review was conducted, inspect the final data, reproduce analyses when applicable, and reuse the shared materials.</p><div class="flow-label">Purpose: make the completed work understandable and reusable</div></div></div><div class="note green"><strong>The public repository is not a copy of the full internal workspace.</strong> Drafts, training files, confidential administrative material, working copies, and restricted full-text PDFs usually remain internal. Final guides, final datasets, analysis files, and other materials needed to interpret the work are selected for public release.</div></div></section>
+<section class="section" id="file-rules"><div class="section-card"><h2>File naming and formats</h2><p>File names and formats should make the project understandable to someone who did not create it.</p><div class="naming-grid"><div class="mini-card"><h3>File naming</h3><ul><li>Use descriptive names.</li><li>Use ISO dates: <code>YYYY-MM-DD</code>.</li><li>Use version numbers while a document is changing.</li><li>Use the same terms throughout the project.</li><li>Preserve original exports before editing or transforming them.</li></ul><div class="goodbad"><div class="good"><strong>Better</strong><code>2026-04-12_pubmed_search.ris</code><code>screening_guide_v2.docx</code><code>risk_of_bias_final.csv</code></div><div class="bad"><strong>Avoid</strong><code>new search.ris</code><code>guide final new.docx</code><code>final_final2.xlsx</code></div></div></div><div class="mini-card"><h3>File formats</h3><ul><li>Keep the original format for platform/database exports.</li><li>For public tabular data, prefer <code>.csv</code> or <code>.tsv</code> when practical.</li><li><code>.xlsx</code> is acceptable for internal work and for files that rely on multiple sheets, formulas, or validation.</li><li><code>.docx</code> is practical for collaborative drafting; <code>.pdf</code> is useful for a fixed final document.</li><li><code>.md</code> is convenient for documents maintained in GitHub, but it is not required.</li><li>Keep native analysis files from the software actually used.</li></ul></div></div><div class="note"><strong>Why this matters.</strong> A descriptive name should tell a new team member what the file contains before they open it. A stable format should allow the file to remain interpretable even if the project later changes software.</div></div></section>
+<section class="section" id="workspace"><div class="section-card"><h2>Recommended internal folder structure</h2><p>This is a recommended common structure. Do not create empty folders for steps that are not part of the review. Additional project-specific folders can be added when needed.</p><pre class="tree"><code>PROJECT/
+├── 00_README/
+├── 01_ADMIN/
+├── 02_PROTOCOL/
+├── 03_SEARCH/
+├── 04_SCREENING/
+├── 05_EXTRACTION/
+├── 06_ASSESSMENT/
+├── 07_ANALYSIS/
+├── 08_OUTPUTS/
+├── 09_MANUSCRIPT/
+└── 10_PUBLIC_RELEASE/</code></pre><div class="note"><strong>Projects will differ.</strong> A review may use Rayyan, Covidence, DistillerSR, spreadsheets, REDCap, R, RevMan, jamovi, Stata, Python, or another workflow. The examples below show where information can be kept; they are not a requirement to use a specific tool or file type.</div><div class="note green"><strong>Data dictionaries are part of the project record.</strong> Keep them with the corresponding final datasets in the internal workspace and include them when those datasets are prepared for public release.</div></div></section>
+<section class="section" id="readme"><div class="section-card">
+      <div class="stage-title"><div class="num">00</div><div><h2>README</h2><p>Start here. The README tells a new team member what the project is, where it is in the workflow, and how the folders are being used.</p></div></div>
+      <pre class="tree"><code>00_README/
+└── README.md</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">README.md</code><p>A short orientation document for the internal project. Update it when the project status, platforms, or folder use changes.</p></div>
+        <span class="public-tag depends">Public version created separately</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>README.md</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.md preferred on GitHub</span><span>.docx acceptable internally</span><span>.pdf for fixed copy</span></div></div>
+      </div>
+    <div class="embedded-example document-preview"><div class="example-head"><strong>Example internal README</strong><span class="example-file">README.md</span></div><div class="document-body">
+<h4>Project</h4><p>Effects of intervention X in preclinical models of condition Y.</p>
+<h4>Current status</h4><p>Full-text screening completed. Data extraction in progress.</p>
+<h4>Registration</h4><p>PROSPERO: CRDXXXXXXXX</p>
+<h4>Main tools</h4><ul><li>Screening: Rayyan</li><li>Extraction: Google Sheets</li><li>Analysis: R</li></ul>
+<h4>Folder notes</h4><p><code>03_SEARCH</code> contains search strategies and database exports. <code>04_SCREENING</code> contains screening rules and decisions.</p>
+</div></div></article></div>
+    </div></section><section class="section" id="admin"><div class="section-card">
+      <div class="stage-title"><div class="num">01</div><div><h2>Administration</h2><p>Project management files. These are important for the team but are usually not part of the public research record.</p></div></div>
+      <pre class="tree"><code>01_ADMIN/
+├── Team/
+├── Meetings/
+├── Authorship/
+├── Timeline/
+└── Key_references/</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Team/</code><p>Team list, roles, responsibilities, and project contact details.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>team_roles.csv</code><code>team_contacts.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv</span><span>.xlsx</span><span>.docx</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example content for team_roles.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>name</th><th>role</th><th>project tasks</th></tr></thead><tbody><tr><td>Reviewer A</td><td>Project lead</td><td>protocol; screening; analysis</td></tr><tr><td>Reviewer B</td><td>Reviewer</td><td>screening; extraction</td></tr><tr><td>Reviewer C</td><td>Reviewer</td><td>screening; risk of bias</td></tr></tbody></table></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Meetings/</code><p>Agendas, minutes, action points, and meeting recordings when the team keeps them.</p></div>
+        <span class="public-tag no">Internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>2026-04-03_meeting_minutes.docx</code><code>2026-04-03_actions.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx</span><span>.pdf</span><span>.xlsx</span><span>.mp4</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Authorship/</code><p>Authorship rules, contribution agreements, and decisions about contributor roles.</p></div>
+        <span class="public-tag no">Internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>authorship_rules.docx</code><code>contributor_roles.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx</span><span>.pdf</span><span>.xlsx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Timeline/</code><p>Project milestones, target dates, and task tracking.</p></div>
+        <span class="public-tag no">Internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>project_timeline.xlsx</code><code>milestones_2026-04-01.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span><span>.pdf</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Key_references/</code><p>Methodological references, key guidance, and papers used by the team while developing the review.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>PRISMA_2020.pdf</code><code>risk_of_bias_tool_reference.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.pdf</span><span>.bib</span><span>.ris</span></div></div>
+      </div>
+    </article></div>
+    </div></section><section class="section" id="protocol"><div class="section-card">
+      <div class="stage-title"><div class="num">02</div><div><h2>Protocol</h2><p>Store what was planned, the final protocol used by the team, the registration record, and changes made later.</p></div></div>
+      <pre class="tree"><code>02_PROTOCOL/
+├── Drafts/
+├── Final/
+├── Registration/
+└── Amendments/</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Drafts/</code><p>Working protocol versions created before the protocol was finalized.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>2026-01-14_protocol_v1.docx</code><code>2026-01-28_protocol_v2.docx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx</span><span>.md</span><span>.pdf</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Final/</code><p>The approved protocol that guided the review.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>2026-02-05_protocol_final.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.pdf preferred for fixed version</span><span>.docx</span><span>.md</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> The final protocol provides the reference point for what the review planned to do.</div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Registration/</code><p>Saved registration record or a file containing the persistent link and registration identifier.</p></div>
+        <span class="public-tag yes">Yes or link</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>PROSPERO_record.pdf</code><code>registration_link.txt</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.pdf</span><span>.html</span><span>.txt</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Amendments/</code><p>Dated changes made after the protocol was finalized, with the reason for each change.</p></div>
+        <span class="public-tag depends">Share relevant changes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>amendments.csv</code><code>amendments_notes.docx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv</span><span>.xlsx</span><span>.docx</span><span>.md</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example amendments.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>date</th><th>section</th><th>change</th><th>reason</th></tr></thead><tbody><tr><td>2026-05-11</td><td>Eligibility criteria</td><td>Added adult zebrafish models</td><td>Relevant studies were identified during search development</td></tr><tr><td>2026-06-02</td><td>Outcome definition</td><td>Clarified preferred time point</td><td>Needed for consistent extraction</td></tr></tbody></table></div></div></article></div>
+    </div></section><section class="section" id="search"><div class="section-card">
+      <div class="stage-title"><div class="num">03</div><div><h2>Search</h2><p>Keep the development of the search separate from the final executed strategies and the original database exports.</p></div></div>
+      <pre class="tree"><code>03_SEARCH/
+├── 01_Search_development/
+│   ├── Sentinel_papers/
+│   └── Draft_strategies/
+├── 02_Final_strategies/
+│   ├── pubmed_strategy_final.txt
+│   └── scopus_strategy_final.txt
+├── 03_Database_exports/
+│   ├── 2026-02-10_pubmed.nbib
+│   └── 2026-02-11_scopus.ris
+├── 04_Deduplication/
+│   └── deduplication_notes.md
+└── search_log.csv</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">01_Search_development/</code><p>Sentinel papers, test searches, draft terms, and working versions used to develop the final search.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>sentinel_papers.xlsx</code><code>pubmed_strategy_v1.docx</code><code>search_terms_notes.docx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.docx</span><span>.txt</span><span>.md</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">02_Final_strategies/</code><p>One final strategy per database/platform, saved exactly as it was executed.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>pubmed_strategy_final.txt</code><code>scopus_strategy_final.txt</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.txt or .md preferred</span><span>.docx</span><span>.pdf</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> The final strategy shows exactly how the literature was identified.</div><div class="embedded-example document-preview"><div class="example-head"><strong>Example final search strategy</strong><span class="example-file">pubmed_strategy_final.txt</span></div><div class="document-body"><h4>Database and platform</h4><p>MEDLINE via PubMed</p><h4>Date searched</h4><p>2026-02-10</p><h4>Records retrieved</h4><p>842</p><h4>Strategy</h4><p><code>("disease model"[Title/Abstract] OR ...) AND ("intervention"[Title/Abstract] OR ...)</code></p></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">03_Database_exports/</code><p>Original files exported from each database or platform. Preserve them unchanged before deduplication or cleaning.</p></div>
+        <span class="public-tag depends">When redistribution is permitted</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>2026-02-10_pubmed.nbib</code><code>2026-02-11_scopus.ris</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>Keep original format</span><span>.ris</span><span>.nbib</span><span>.csv</span><span>.txt</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> Keeping the original export preserves the records exactly as retrieved before any processing.</div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">04_Deduplication/</code><p>Files or notes documenting how duplicate records were identified and removed.</p></div>
+        <span class="public-tag depends">Method and relevant files</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>deduplication_notes.md</code><code>records_after_deduplication.csv</code><code>deduplication_script.R</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.md</span><span>.txt</span><span>.csv</span><span>.R</span></div></div>
+      </div>
+    <div class="embedded-example document-preview"><div class="example-head"><strong>Example deduplication note</strong><span class="example-file">deduplication_notes.md</span></div><div class="document-body"><h4>Software</h4><p>Zotero 7.0</p><h4>Input</h4><p>PubMed and Scopus exports.</p><h4>Records</h4><p>1,903 before deduplication; 1,522 after deduplication.</p><h4>Procedure</h4><p>Automatic duplicate detection followed by manual review of uncertain matches.</p></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">search_log.csv</code><p>A single log linking each search run to its database, platform, date, result count, strategy file, and export file.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>search_log.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv preferred</span><span>.xlsx internally</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example search_log.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>database</th><th>platform</th><th>search date</th><th>records</th><th>strategy file</th><th>export file</th></tr></thead><tbody><tr><td>MEDLINE</td><td>PubMed</td><td>2026-02-10</td><td>842</td><td>pubmed_strategy_final.txt</td><td>2026-02-10_pubmed.nbib</td></tr><tr><td>Scopus</td><td>Scopus</td><td>2026-02-11</td><td>1,061</td><td>scopus_strategy_final.txt</td><td>2026-02-11_scopus.ris</td></tr></tbody></table></div></div></article></div>
+    </div></section><section class="section" id="screening"><div class="section-card">
+      <div class="stage-title"><div class="num">04</div><div><h2>Screening</h2><p>Store the rules used by reviewers, original platform exports, working decisions, adjudication, and the final screening dataset.</p></div></div>
+      <pre class="tree"><code>04_SCREENING/
+├── 01_Guide/
+│   └── screening_guide_final.pdf
+├── 02_Training/
+│   └── screening_pilot_round1.xlsx
+├── 03_Platform_exports/
+│   └── 2026-04-18_rayyan_export.csv
+├── 04_Title_abstract/
+├── 05_Full_text/
+├── 06_Adjudication/
+├── 07_Final_data/
+│   └── screening_final.csv
+└── Full_text_library/</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">01_Guide/</code><p>Eligibility criteria translated into practical screening rules, including how to handle common ambiguous cases.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>screening_guide_v1.docx</code><code>screening_guide_final.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx for drafting</span><span>.pdf or .md for final</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> The final decisions show what was included or excluded. The guide shows how the team interpreted the eligibility criteria while making those decisions.</div><div class="embedded-example document-preview"><div class="example-head"><strong>Example screening guide</strong><span class="example-file">screening_guide_final.pdf</span></div><div class="document-body"><h4>Include when</h4><ul><li>Original preclinical study</li><li>Relevant experimental model</li><li>Intervention matches the protocol</li><li>At least one eligible outcome is reported</li></ul><h4>Exclude when</h4><ul><li>Human study</li><li>Review, editorial, protocol, or conference abstract only</li><li>Wrong model or intervention</li></ul><h4>Ambiguous cases</h4><p>If eligibility cannot be determined from the abstract, include for full-text assessment.</p></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">02_Training/</code><p>Pilot screening rounds, calibration exercises, and notes used to align reviewers before formal screening.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>screening_pilot_round1.xlsx</code><code>training_notes.docx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span><span>.docx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">03_Platform_exports/</code><p>Original export from Rayyan, Covidence, DistillerSR, or another screening platform.</p></div>
+        <span class="public-tag depends">When useful/shareable</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>2026-04-18_rayyan_export.csv</code><code>covidence_screening_export.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>Keep original platform format</span><span>.csv</span><span>.xlsx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">04_Title_abstract/</code><p>Working title/abstract decisions when these are kept outside the platform export or need a separate project file.</p></div>
+        <span class="public-tag depends">Final version if useful</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>title_abstract_decisions.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx internally</span><span>.csv for stable table</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">05_Full_text/</code><p>Full-text eligibility decisions and the reasons for exclusion.</p></div>
+        <span class="public-tag yes">Final data</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>full_text_decisions.xlsx</code><code>full_text_exclusions.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">06_Adjudication/</code><p>Conflicts between reviewers and the consensus decision reached by the team.</p></div>
+        <span class="public-tag depends">Optional</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>screening_conflicts.xlsx</code><code>adjudication_log.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span><span>.docx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">07_Final_data/</code><p>Curated screening dataset used for the final study counts and PRISMA flow diagram.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>screening_final.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred for sharing</span><span>.xlsx internally</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example screening_final.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>record_id</th><th>title/abstract</th><th>full text</th><th>exclusion reason</th></tr></thead><tbody><tr><td>R0001</td><td>include</td><td>include</td><td></td></tr><tr><td>R0002</td><td>include</td><td>exclude</td><td>Wrong population</td></tr><tr><td>R0003</td><td>exclude</td><td></td><td>Wrong study design</td></tr><tr><td>R0004</td><td>include</td><td>exclude</td><td>No eligible outcome</td></tr></tbody></table></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Full_text_library/</code><p>Article PDFs used by the review team for eligibility assessment.</p></div>
+        <span class="public-tag no">Do not publish by default</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>PMID_12345678.pdf</code><code>Smith_2024.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.pdf</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> The team may need a complete internal library, but article PDFs can be subject to copyright and redistribution restrictions.</div></article></div>
+    </div></section><section class="section" id="extraction"><div class="section-card">
+      <div class="stage-title"><div class="num">05</div><div><h2>Data extraction</h2><p>Keep instructions, forms, platform exports, reviewer-level work, consensus decisions, and the final curated dataset distinguishable from each other.</p></div></div>
+      <pre class="tree"><code>05_EXTRACTION/
+├── 01_Guide/
+│   └── extraction_guide_final.pdf
+├── 02_Training/
+│   └── pilot_extraction.xlsx
+├── 03_Template_or_form/
+│   └── extraction_template.xlsx
+├── 04_Platform_exports/
+├── 05_Reviewer_entries/
+├── 06_Adjudication/
+├── 07_Final_data/
+│   └── extracted_data.csv
+├── 08_Data_dictionary/
+│   └── data_dictionary.csv
+└── 09_Decision_log/
+    └── extraction_decision_log.csv</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">01_Guide/</code><p>Definitions, allowed values, units, source rules, conversions, and project-specific instructions for extracting data consistently.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>extraction_guide_v1.docx</code><code>extraction_guide_final.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx for drafting</span><span>.pdf or .md for final</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> The dataset shows the extracted values. The guide explains how reviewers interpreted and collected those values.</div><div class="embedded-example document-preview"><div class="example-head"><strong>Example extraction guide</strong><span class="example-file">extraction_guide_final.pdf</span></div><div class="document-body"><h4>species</h4><p>Report the species as described by the authors. Use <code>NR</code> when not reported.</p><h4>sample_size</h4><p>Extract the number of animals contributing to the reported outcome.</p><h4>outcome_source</h4><p>Allowed values: table, text, figure, supplementary material, author contact.</p><h4>notes</h4><p>Record any interpretation or conversion that may affect the final value.</p></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">02_Training/</code><p>Pilot extraction and calibration exercises completed before or during extraction.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>pilot_extraction.xlsx</code><code>calibration_round2.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">03_Template_or_form/</code><p>The blank form or structure used to collect data. This may be a spreadsheet, REDCap instrument, Covidence form, or another tool.</p></div>
+        <span class="public-tag yes">Share when possible</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>extraction_template.xlsx</code><code>blank_extraction_form.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>Native form/export</span><span>.xlsx</span><span>.pdf</span><span>.docx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">04_Platform_exports/</code><p>Original export from the extraction platform when extraction was performed in Covidence, DistillerSR, REDCap, or another system.</p></div>
+        <span class="public-tag depends">When useful/shareable</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>covidence_extraction_export.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>Keep original platform format</span><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">05_Reviewer_entries/</code><p>Individual reviewer extractions when the project uses duplicate or independent extraction.</p></div>
+        <span class="public-tag depends">Optional</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>reviewer_A_extraction.xlsx</code><code>reviewer_B_extraction.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">06_Adjudication/</code><p>Resolved disagreements and consensus records between reviewers.</p></div>
+        <span class="public-tag depends">Optional</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>extraction_conflicts.xlsx</code><code>consensus_decisions.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">07_Final_data/</code><p>Curated dataset used for reporting, descriptive synthesis, or analysis. A project may have one or several final datasets depending on its design.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>extracted_data.csv</code><code>study_characteristics.csv</code><code>quantitative_data.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred for sharing</span><span>.xlsx internally</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example extracted_data.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>study_id</th><th>species</th><th>sex</th><th>n</th><th>outcome</th><th>timepoint</th><th>value</th><th>unit</th><th>source</th></tr></thead><tbody><tr><td>S001</td><td>Rattus norvegicus</td><td>male</td><td>10</td><td>Lesion volume</td><td>7 days</td><td>42.1</td><td>mm3</td><td>figure</td></tr><tr><td>S002</td><td>Mus musculus</td><td>female</td><td>12</td><td>Behavior score</td><td>14 days</td><td>6.2</td><td>points</td><td>table</td></tr></tbody></table></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">08_Data_dictionary/</code><p>A file-level key for every variable in each final dataset. Column names must match the dataset exactly and should be updated whenever a variable is added, removed, renamed, recoded, or derived.</p></div>
+        <span class="public-tag yes">Yes — required with final data</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>data_dictionary.csv</code><code>qualitative_data_dictionary.csv</code><code>quantitative_data_dictionary.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred for sharing</span><span>.xlsx internally</span></div></div>
+      </div>
+      <div class="why"><strong>Required correspondence.</strong> Every column in a final dataset must appear in its data dictionary, and every dictionary entry must refer to a column in that dataset.</div>
+      <div class="embedded-example"><div class="example-caption">Example data_dictionary.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>variable_name</th><th>description</th><th>data_type</th><th>allowed_values</th><th>unit</th><th>missing_value</th><th>example</th><th>source_or_derivation</th></tr></thead><tbody><tr><td>exp_id</td><td>Identifier for an independent experiment within a study</td><td>text</td><td>study_id + _EXP + two digits</td><td>—</td><td>NA</td><td>S001_EXP01</td><td>Assigned by the review team</td></tr><tr><td>atp_interval_to_outcome_min_std</td><td>Standardised interval from treatment administration to outcome measurement</td><td>numeric</td><td>non-negative number</td><td>minutes</td><td>NR</td><td>30</td><td>Reported interval converted to minutes</td></tr></tbody></table></div></div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">09_Decision_log/</code><p>Late exclusions, interpretation changes, conversions, special cases, and decisions that affect how the final dataset should be understood.</p></div>
+        <span class="public-tag depends">Share relevant decisions</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>extraction_decision_log.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv</span><span>.xlsx</span><span>.md</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example extraction_decision_log.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>date</th><th>study_id</th><th>issue</th><th>decision</th><th>reason</th></tr></thead><tbody><tr><td>2026-07-02</td><td>S014</td><td>Outcome reported as SEM</td><td>Converted SEM to SD</td><td>Needed for quantitative synthesis</td></tr><tr><td>2026-07-05</td><td>S027</td><td>Eligibility changed during extraction</td><td>Study excluded</td><td>Intervention did not meet protocol definition</td></tr></tbody></table></div></div></article></div>
+    </div></section><section class="section" id="assessment"><div class="section-card">
+      <div class="stage-title"><div class="num">06</div><div><h2>Assessment</h2><p>Use this section for risk of bias, reporting quality, or another structured assessment. Add only the assessment modules used in the project.</p></div></div>
+      <pre class="tree"><code>06_ASSESSMENT/
+├── Risk_of_bias/
+│   ├── Guide/
+│   ├── Tool/
+│   ├── Training/
+│   ├── Reviewer_entries/
+│   ├── Adjudication/
+│   ├── Final_data/
+│   └── Data_dictionary/
+└── Reporting_quality/
+    └── [same structure when applicable]</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Guide/</code><p>Project-specific instructions for applying the assessment tool and interpreting each domain or item.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>risk_of_bias_guide_v1.docx</code><code>risk_of_bias_guide_final.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx for drafting</span><span>.pdf or .md for final</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> Final judgments are difficult to interpret without knowing how the team applied the tool in this review.</div><div class="embedded-example document-preview"><div class="example-head"><strong>Example risk-of-bias guide</strong><span class="example-file">risk_of_bias_guide_final.pdf</span></div><div class="document-body"><h4>Tool</h4><p>SYRCLE Risk of Bias Tool</p><h4>Sequence generation</h4><p><strong>Low:</strong> random allocation method is explicitly described and appropriate.<br><strong>Unclear:</strong> randomization stated but method not reported.<br><strong>High:</strong> non-random allocation used.</p><h4>Support for judgment</h4><p>Record the article location whenever possible.</p></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Tool/</code><p>Tool name, version, citation, instructions, and any adaptations made for the project.</p></div>
+        <span class="public-tag yes">Link/citation or shareable file</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>tool_reference.pdf</code><code>tool_version_and_adaptations.md</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.pdf</span><span>.md</span><span>.txt</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Training/</code><p>Pilot assessments and reviewer calibration files.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>rob_training_round1.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span><span>.docx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Reviewer_entries/</code><p>Individual reviewer judgments when assessments are performed independently.</p></div>
+        <span class="public-tag depends">Optional</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>reviewer_A_rob.xlsx</code><code>reviewer_B_rob.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Adjudication/</code><p>Consensus decisions and resolved conflicts.</p></div>
+        <span class="public-tag depends">Optional</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>rob_conflicts.xlsx</code><code>rob_consensus.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.xlsx</span><span>.csv</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Final_data/</code><p>Final judgments and supporting information used in the review.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>risk_of_bias_final.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred for sharing</span><span>.xlsx internally</span></div></div>
+      </div>
+    <div class="embedded-example"><div class="example-caption">Example risk_of_bias_final.csv</div><div class="table-scroll"><table class="data-example"><thead><tr><th>study_id</th><th>domain</th><th>judgment</th><th>support</th><th>source location</th></tr></thead><tbody><tr><td>S001</td><td>Sequence generation</td><td>Low</td><td>Computer-generated randomization</td><td>Methods p.4</td></tr><tr><td>S001</td><td>Allocation concealment</td><td>Unclear</td><td>Not described</td><td>Methods</td></tr><tr><td>S002</td><td>Sequence generation</td><td>High</td><td>Animals allocated by cage number</td><td>Methods p.3</td></tr></tbody></table></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Data_dictionary/</code><p>Definitions for the columns used in the final assessment dataset, including domains, judgment categories, missing-value codes, and the meaning of supporting-information fields.</p></div>
+        <span class="public-tag yes">Yes — required with final data</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>risk_of_bias_data_dictionary.csv</code><code>reporting_quality_data_dictionary.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred for sharing</span><span>.xlsx internally</span></div></div>
+      </div>
+      <div class="why"><strong>Why?</strong> Assessment labels and supporting fields can be interpreted differently across tools and projects. The dictionary records the meaning used in this review.</div>
+    </article></div>
+    </div></section><section class="section" id="analysis"><div class="section-card">
+      <div class="stage-title"><div class="num">07</div><div><h2>Analysis</h2><p>Store the exact data used as input, the native analysis files, derived datasets, software information, and analysis-generated outputs. This section is not limited to meta-analysis.</p></div></div>
+      <pre class="tree"><code>07_ANALYSIS/
+├── 01_Input_data/
+│   └── analysis_input.csv
+├── 02_Analysis_files/
+│   ├── analysis_README.md
+│   └── [R / jamovi / RevMan / Stata / SPSS / Python / other]
+├── 03_Derived_data/
+├── 04_Software_environment/
+└── 05_Analysis_outputs/</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">01_Input_data/</code><p>Exact dataset imported into the analysis. Keep this separate from earlier extraction files so the analysis input is unambiguous.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>analysis_input.csv</code><code>meta_input.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred</span><span>.xlsx when necessary</span></div></div>
+      </div>
+    <div class="why"><strong>Why?</strong> A separate input file identifies exactly which version of the data entered the analysis.</div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">02_Analysis_files/</code><p>Native files used to perform the analysis. The software may vary by project.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>01_prepare_data.R</code><code>analysis.omv</code><code>review.revman</code><code>analysis.do</code><code>analysis.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>Native analysis format</span><span>.R</span><span>.Rmd</span><span>.omv</span><span>.do</span><span>.py</span><span>.xlsx</span></div></div>
+      </div>
+    <div class="embedded-example document-preview"><div class="example-head"><strong>Example analysis README</strong><span class="example-file">analysis_README.md</span></div><div class="document-body"><h4>Software</h4><p>R 4.5.1; metafor 4.8-0</p><h4>Files</h4><p><code>01_Input_data/meta_input.csv</code><br><code>02_Analysis_files/01_prepare_data.R</code><br><code>02_Analysis_files/02_meta_analysis.R</code><br><code>03_Derived_data/effect_sizes.csv</code></p><h4>Run order</h4><ol><li>Run <code>01_prepare_data.R</code></li><li>Run <code>02_meta_analysis.R</code></li><li>Generated figures are saved in <code>05_Analysis_outputs/</code></li></ol></div></div></article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">03_Derived_data/</code><p>Effect sizes, transformed datasets, derived variables, or model-ready files created from the analysis input.</p></div>
+        <span class="public-tag yes">When needed to reproduce results</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>effect_sizes.csv</code><code>model_data.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv preferred</span><span>.xlsx</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">04_Software_environment/</code><p>Software versions, package versions, session information, or environment files needed to reproduce the analysis.</p></div>
+        <span class="public-tag depends">Recommended when relevant</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>sessionInfo.txt</code><code>renv.lock</code><code>software_versions.md</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.txt</span><span>.md</span><span>.lock</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">05_Analysis_outputs/</code><p>Model summaries, analysis-generated tables, plots, or reports before they are moved into final outputs.</p></div>
+        <span class="public-tag depends">When useful</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>model_summary.txt</code><code>forest_plot.svg</code><code>analysis_report.html</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.txt</span><span>.csv</span><span>.svg</span><span>.pdf</span><span>.html</span></div></div>
+      </div>
+    </article></div><div class="note"><strong>Software independence.</strong> R is not required. Preserve the native files used in RevMan, jamovi, Excel, Stata, SPSS, Python, or another program, plus an interpretable export of the analysis data when possible.</div>
+    </div></section><section class="section" id="outputs"><div class="section-card">
+      <div class="stage-title"><div class="num">08</div><div><h2>Outputs</h2><p>Final figures, tables, flow diagrams, and supplementary materials prepared from the review. These can exist whether or not the review includes a meta-analysis.</p></div></div>
+      <pre class="tree"><code>08_OUTPUTS/
+├── PRISMA_flowchart/
+├── Figures/
+├── Tables/
+└── Supplementary_material/</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">PRISMA_flowchart/</code><p>Editable/source version and final exported flow diagram where available.</p></div>
+        <span class="public-tag yes">Yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>prisma_flowchart.drawio</code><code>prisma_flowchart.svg</code><code>prisma_flowchart.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>Editable source when available</span><span>.svg</span><span>.pdf</span><span>.png</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Figures/</code><p>Final figures and, when useful, the editable/source versions from which they were produced.</p></div>
+        <span class="public-tag yes">Usually yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>figure_1_forest_plot.svg</code><code>figure_2_risk_of_bias.pdf</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.svg preferred for vector figures</span><span>.pdf</span><span>.png</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Tables/</code><p>Final tables and supporting tabular files.</p></div>
+        <span class="public-tag yes">Usually yes</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>table_1_study_characteristics.csv</code><code>table_2_results.xlsx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.csv or .tsv for data</span><span>.xlsx</span><span>.pdf</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Supplementary_material/</code><p>Supplementary files prepared for the manuscript or needed to interpret the review.</p></div>
+        <span class="public-tag depends">When relevant</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>supplementary_methods.pdf</code><code>supplementary_table_S1.csv</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.pdf</span><span>.csv</span><span>.xlsx</span></div></div>
+      </div>
+    </article></div>
+    </div></section><section class="section" id="manuscript"><div class="section-card">
+      <div class="stage-title"><div class="num">09</div><div><h2>Manuscript</h2><p>Working manuscript, reference-management, and submission files. These files are part of the internal project record but are usually not the research-data release.</p></div></div>
+      <pre class="tree"><code>09_MANUSCRIPT/
+├── Drafts/
+├── References/
+└── Submission/</code></pre>
+      <div class="folder-grid">
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Drafts/</code><p>Working manuscript versions.</p></div>
+        <span class="public-tag no">Internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>2026-08-01_manuscript_v1.docx</code><code>2026-08-20_manuscript_v2.docx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx</span><span>.tex</span><span>.md</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">References/</code><p>Reference-library exports and citation files used for the manuscript.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>references.bib</code><code>manuscript_references.ris</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.bib</span><span>.ris</span><span>.enl</span></div></div>
+      </div>
+    </article>
+    <article class="folder-card">
+      <div class="folder-top">
+        <div><code class="folder-name">Submission/</code><p>Submitted manuscript, cover letter, response files, and journal forms.</p></div>
+        <span class="public-tag no">Usually internal</span>
+      </div>
+      <div class="folder-meta">
+        <div><span class="meta-label">Example files</span><div class="file-chips"><code>submitted_manuscript.docx</code><code>cover_letter.docx</code><code>response_to_reviewers.docx</code></div></div>
+        <div><span class="meta-label">Preferred formats</span><div class="format-chips"><span>.docx</span><span>.pdf</span></div></div>
+      </div>
+    </article></div>
+    </div></section>
+<section class="section" id="release"><div class="section-card"><div class="stage-title"><div class="num">10</div><div><h2>Public release</h2><p>Select the final and shareable materials from the internal workspace and organize them so the repository can be understood without access to the team's private working files.</p></div></div><pre class="tree"><code>10_PUBLIC_RELEASE/
+├── README.md
+├── LICENSE.md
+├── protocol/
+├── search/
+├── screening/
+├── extraction/
+│   ├── final_data.csv
+│   └── data_dictionary.csv
+├── assessment/        # when applicable
+│   ├── final_assessment.csv
+│   └── assessment_data_dictionary.csv
+├── analysis/          # when applicable
+└── outputs/           # when applicable</code></pre><h3>From internal workspace to public repository</h3><table class="release-map"><thead><tr><th>Internal material</th><th>Public repository</th><th>What to do</th></tr></thead><tbody>
+<tr><td>Protocol drafts</td><td>No</td><td>Keep internally.</td></tr><tr><td>Final protocol + registration</td><td>Yes</td><td>Share the final version and registration link/record.</td></tr><tr><td>Search development notes</td><td>Usually no</td><td>Keep internally unless they are needed to explain the search.</td></tr><tr><td>Final search strategies + search log</td><td>Yes</td><td>Share the executed strategies and search history.</td></tr><tr><td>Original database exports</td><td>Depends</td><td>Share only when redistribution is allowed and useful.</td></tr><tr><td>Screening training files</td><td>Usually no</td><td>Keep internally.</td></tr><tr><td>Screening guide + final screening data</td><td>Yes</td><td>Share the rules and final decisions needed to interpret study selection.</td></tr><tr><td>Extraction guide + final extracted data</td><td>Yes</td><td>Share both the values and the instructions used to obtain them.</td></tr><tr><td>Data dictionaries</td><td>Yes</td><td>Share a dictionary for every final dataset, using the exact dataset column names.</td></tr><tr><td>Reviewer working files</td><td>Usually no</td><td>Share only when there is a clear reason to expose reviewer-level data.</td></tr><tr><td>Final assessment data + guide</td><td>Yes, if performed</td><td>Share the final judgments and how the tool was applied.</td></tr><tr><td>Analysis input + analysis files</td><td>Yes, if analysis performed</td><td>Share what is needed to rerun or inspect the analysis.</td></tr><tr><td>Final outputs</td><td>Usually yes</td><td>Share flowcharts, figures, tables, and supporting files when relevant.</td></tr><tr><td>Full-text article PDFs</td><td>No by default</td><td>Keep internal unless redistribution is explicitly permitted.</td></tr></tbody></table>
+<div class="embedded-example document-preview"><div class="example-head"><strong>Example public README</strong><span class="example-file">README.md</span></div><div class="document-body"><h4>Review</h4><p>Effects of intervention X in preclinical models of condition Y.</p><h4>Contents</h4><p><code>protocol/</code> final protocol and amendments<br><code>search/</code> search strategies and search log<br><code>screening/</code> screening guide and final decisions<br><code>extraction/</code> extraction guide, final data, and data dictionaries<br><code>assessment/</code> risk-of-bias materials and assessment data dictionary<br><code>analysis/</code> analysis data and files<br><code>outputs/</code> flowchart, figures, and tables</p><h4>Related publication</h4><p>[DOI or citation]</p><h4>License</h4><p>[license for data/documentation] · [license for code, if different]</p><h4>Contact</h4><p>[project contact]</p></div></div>
+<div class="note caution"><strong>Do not automatically publish:</strong> full-text article PDFs, personal contact information, confidential meeting material, or database/platform exports whose license does not allow redistribution.</div></div></section>
+<section class="section" id="repository"><div class="section-card"><h2>Public repository</h2><div class="note caution"><strong>BRISA repository decision pending.</strong> The standard repository for future BRISA releases has not yet been selected. Prepare the complete release package in <code>10_PUBLIC_RELEASE/</code> and retain it in the BRISA Google Drive until project-specific or institutional instructions are confirmed.</div><h3>Requirements for the future BRISA repository</h3><ul class="checklist"><li>Persistent identifier for the public release</li><li>Versioning for corrections and review updates</li><li>Clear licensing and file-level metadata</li><li>Suitable file-size and file-type limits</li><li>Long-term availability</li><li>Support for any required access restrictions</li><li>Compliance with journal, funder, and institutional requirements</li></ul><h3>For groups adapting this guide</h3><p>Groups outside BRISA should define a repository at the institutional level rather than leaving the decision undocumented within each project. Where no standard exists, compare suitable domain, institutional, and general-purpose repositories using the requirements above. GitHub is appropriate for active code and documentation but does not replace an archival research-data record when a persistent release is required.</p><div class="repo-grid"><div class="repo-card"><h3>Institutional or domain repository</h3><p>Use when an institution, funder, journal, or research community provides or requires one.</p></div><div class="repo-card"><h3>General-purpose repository</h3><p>Evaluate persistent identifiers, versioning, licensing, metadata, storage limits, and preservation.</p></div><div class="repo-card"><h3>GitHub</h3><p>Use for version-controlled code, documentation, and project websites. Archive a release elsewhere when required.</p></div><div class="repo-card"><h3>Repository directories</h3><p>Use re3data or FAIRsharing when no institutional or disciplinary standard is available.</p></div></div><div class="note"><strong>Repository directories:</strong> <a href="https://www.re3data.org/" target="_blank" rel="noreferrer">re3data</a> · <a href="https://fairsharing.org/" target="_blank" rel="noreferrer">FAIRsharing</a>.</div></div></section>
+<section class="section" id="references"><div class="section-card"><h2>Sources and rationale</h2><p class="muted">The folder structure is a BRISA organizational recommendation. Reporting, search-documentation, open-data, and data-organization guidance informed the decisions in this guide.</p><div class="refs"><div class="ref"><strong>PRISMA 2020</strong><span>Availability of review materials, extracted data, analysis data, and analytic code.</span><a href="https://www.prisma-statement.org/prisma-2020" target="_blank" rel="noreferrer">Open source ↗</a></div><div class="ref"><strong>PRISMA-S</strong><span>Search strategies, databases/platforms, dates, retrieval counts, and deduplication reporting.</span><a href="https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-020-01542-z" target="_blank" rel="noreferrer">Open source ↗</a></div><div class="ref"><strong>FAIR principles</strong><span>Metadata, persistent identifiers, provenance, accessibility, and reuse.</span><a href="https://www.go-fair.org/fair-principles/" target="_blank" rel="noreferrer">Open source ↗</a></div><div class="ref"><strong>BIDS</strong><span>Used as an example of consistent folder organization, documentation, and extensible data conventions.</span><a href="https://bids.neuroimaging.io/" target="_blank" rel="noreferrer">Open source ↗</a></div><div class="ref"><strong>BRISA examples</strong><span>Existing BRISA projects illustrate different software and public-data workflows.</span><a href="https://github.com/matheusglls/NMDA-sb" target="_blank" rel="noreferrer">NMDA-sb ↗</a> · <a href="https://github.com/BRISAcollab/social-zebrafish" target="_blank" rel="noreferrer">Social Zebrafish ↗</a></div><div class="ref"><strong>BRISA</strong><span>Brazilian Reproducibility Initiative in preclinical Systematic review and meta-Analysis.</span><a href="https://www.reprodutibilidade.org/brisa" target="_blank" rel="noreferrer">BRISA website ↗</a></div></div></div></section>
+<footer><img src="brisa-logo.png" alt="BRISA logo"><div>BRISA Project Data Management and Sharing Guide</div><div style="margin-top:4px">Guide text licensed under CC BY-NC 4.0 unless otherwise noted.</div></footer>
+</main></div></body></html>
